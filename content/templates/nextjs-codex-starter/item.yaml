@@ -1,0 +1,17 @@
+id: template.nextjs-codex-starter
+type: template
+title: Next.js Codex Starter
+summary: Minimal Next.js starter with Codex-friendly prompt and docs structure.
+tags: [nextjs, starter, codex]
+author: "@codexdepot"
+license: MIT
+compatibility: [codex-cli, vscode]
+updated_at: 2026-02-20
+difficulty: beginner
+install_path: "."
+entry_files:
+  - package.json
+  - src/prompts/starter.md
+template_version: 1.0.0
+source_url: https://nextjs.org
+

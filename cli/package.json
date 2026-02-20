@@ -1,0 +1,12 @@
+{
+  "name": "codexdepot",
+  "version": "0.1.0",
+  "description": "CLI for browsing and installing CodexDepot items from a static index.",
+  "bin": {
+    "codexdepot": "./bin/codexdepot.js"
+  },
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  }
+}

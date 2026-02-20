@@ -1,0 +1,14 @@
+{
+  "id": "setting.your-setting-slug",
+  "type": "setting",
+  "title": "Your Setting Profile",
+  "summary": "One sentence describing this configuration profile.",
+  "tags": ["settings", "profile", "codex"],
+  "author": "@your-handle",
+  "license": "MIT",
+  "compatibility": ["codex-cli"],
+  "updated_at": "2026-02-20",
+  "target_tool": "codex-cli",
+  "schema_version": "1.0.0"
+}
+

@@ -1,0 +1,39 @@
+{
+  "index_version": "1.0.0",
+  "generated_at": "2026-02-20T20:59:25.619Z",
+  "totals": {
+    "items": 6,
+    "by_type": {
+      "skill": 1,
+      "agent": 1,
+      "command": 1,
+      "template": 1,
+      "hook": 1,
+      "setting": 1
+    }
+  },
+  "by_tag": {
+    "git": 2,
+    "codex": 1,
+    "commits": 1,
+    "defaults": 1,
+    "hook": 1,
+    "nextjs": 1,
+    "productivity": 1,
+    "quality": 1,
+    "refactor": 1,
+    "review": 1,
+    "safety": 1,
+    "settings": 1,
+    "starter": 1,
+    "support": 1,
+    "testing": 1,
+    "triage": 1,
+    "workflow": 1
+  },
+  "by_compatibility": {
+    "codex-cli": 6,
+    "vscode": 3,
+    "github": 1
+  }
+}
