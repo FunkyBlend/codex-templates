@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { AddToStackButton } from "@/components/AddToStackButton";
 import type {
   CatalogItem,
   CatalogItemType,
