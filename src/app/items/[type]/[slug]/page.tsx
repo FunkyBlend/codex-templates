@@ -83,7 +83,7 @@ export default async function ItemDetailPage({ params }: ItemPageProps) {
                 {item.type}
               </span>
               <span className="badge">
-                v{item.version}
+                v{item.content_version}
               </span>
               {item.compatibility.map((compatibility) => (
                 <span key={`${item.id}-${compatibility}`} className="badge text-dark-muted">
@@ -142,7 +142,7 @@ export default async function ItemDetailPage({ params }: ItemPageProps) {
             <div className="flex flex-col gap-4 text-sm">
               <div className="flex justify-between items-center border-b border-dark-border/50 pb-3">
                 <span className="text-dark-muted flex items-center gap-2"><Tag size={14} /> Version</span>
-                <span className="text-white font-mono">{item.version}</span>
+                <span className="text-white font-mono">{item.content_version}</span>
               </div>
               
               <div className="flex justify-between items-center border-b border-dark-border/50 pb-3">

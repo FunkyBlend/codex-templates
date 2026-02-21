@@ -14,7 +14,8 @@ export function AddToStackButton({ item }: { item: any }) {
       addItem({
         id: item.id,
         name: item.title,
-        command: item.slug,
+        slug: item.slug,
+        installCommand: item.install_hint,
         category: item.type,
       });
     }
