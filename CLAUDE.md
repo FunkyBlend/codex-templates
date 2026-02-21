@@ -1,135 +1,91 @@
-# Codex Templates Marketplace
+# CodexDepot Workspace Notes
 
-## Project Overview
-Full-stack OpenAI Codex template marketplace built with Next.js 14 (App Router), TypeScript, Tailwind CSS, Prisma, Zustand, Recharts, and Zod.
+## Repository Identity
+- GitHub: `FunkyBlend/codex-templates`
+- Default branch: `main`
+- Catalog source defaults:
+  - `CATALOG_REPO=FunkyBlend/codex-templates`
+  - `CATALOG_BRANCH=main`
 
-## Tech Stack
-- **Framework**: Next.js 14+ (App Router, TypeScript)
-- **Styling**: Tailwind CSS (dark theme)
-- **Database**: PostgreSQL via Prisma (schema in `prisma/schema.prisma`)
-- **State**: Zustand (Stack Builder in `src/store/stackBuilder.ts`)
-- **Charts**: Recharts (trending page)
-- **Validation**: Zod (API routes in `src/lib/validations.ts`)
-- **Icons**: Lucide React
-- **Markdown**: react-markdown + react-syntax-highlighter (blog posts)
+## Project Purpose
+CodexDepot is a content-first Codex marketplace.
 
-## Commands
-- `npm run dev` — Start dev server (localhost:3000)
-- `npm run build` — Production build
-- `npm run lint` — Run ESLint
-- `npm run db:generate` — Generate Prisma client
-- `npm run db:push` — Push schema to database
-- `npm run db:seed` — Seed database (`tsx prisma/seed.ts`)
+The source of truth is repository content in `content/`, validated and transformed into static data artifacts in `public/data/`. The Next.js app and CLI both consume those generated artifacts.
 
-## Project Structure
-```
-src/
-├── app/                    # Next.js App Router pages
-│   ├── page.tsx            # Homepage (hero, search, grid, companies, tools)
-│   ├── layout.tsx          # Root layout (Header + Footer)
-│   ├── globals.css         # Tailwind + custom styles
-│   ├── [category]/         # Dynamic category pages (agents, plugins, etc.)
-│   ├── companies/          # Company list + [slug] detail
-│   ├── featured/[slug]/    # Featured project detail
-│   ├── trending/           # Trending dashboard with Recharts
-│   ├── blog/               # Blog list + [slug] detail with markdown
-│   └── api/                # API routes (all Zod-validated)
-│       ├── components/     # GET/POST + [id] GET/PATCH
-│       ├── companies/      # GET + [slug] GET
-│       ├── blog/           # GET + [slug] GET
-│       ├── featured/       # GET + [slug] GET
-│       ├── trending/       # GET with ?range=today|week|month
-│       └── analytics/      # POST download, GET stats
-├── components/
-│   ├── layout/             # Header.tsx, Footer.tsx
-│   ├── ComponentCard.tsx   # Reusable component card with add-to-stack
-│   ├── SearchBar.tsx       # Search + category filter + sort dropdown
-│   ├── FeaturedCarousel.tsx# Featured projects carousel
-│   └── StackBuilder.tsx    # Desktop sidebar + mobile bottom sheet
-├── lib/
-│   ├── data.ts             # Static mock data (35 companies, 55 components, etc.)
-│   ├── db.ts               # Prisma client singleton
-│   ├── types.ts            # Category definitions, shared types
-│   └── validations.ts      # Zod schemas for API validation
-└── store/
-    └── stackBuilder.ts     # Zustand store with localStorage persistence
-prisma/
-├── schema.prisma           # Database schema (Component, Company, etc.)
-└── seed.ts                 # Seed script (excluded from tsconfig)
-```
+## Current Tech Stack
+- App: Next.js 14 (App Router) + TypeScript
+- UI: Tailwind CSS + React components under `src/components/`
+- Data pipeline: TypeScript scripts in `scripts/`
+- Validation: AJV + JSON schemas in `schemas/`
+- Optional DB scaffolding: Prisma (`prisma/`) is present, but MVP is static-data driven
+- CLI: `cli/bin/codexdepot.js`
 
-## Design System
-- **Background**: `#0d1117` — Cards: `#161b22` — Borders: `#30363d` — Text: `#e6edf3`
-- **Primary accent**: `#10a37f` (OpenAI green)
-- **Secondary accent**: `#2563eb` (blue)
-- **Fonts**: Inter (sans), JetBrains Mono (mono)
-- **Tailwind classes**: `bg-dark-bg`, `bg-dark-card`, `border-dark-border`, `text-dark-text`, `text-dark-muted`, `text-accent-green`, `text-accent-blue`
-- **Utility classes**: `.card`, `.btn-primary`, `.btn-secondary`, `.badge`, `.ascii-glow`
+## Key Paths
+- `content/` catalog items (skills, agents, commands, templates, hooks, settings)
+- `schemas/` metadata schemas
+- `scripts/lib/content-pipeline.ts` validation + index/search/stats generation
+- `public/data/index.json` generated catalog index
+- `public/data/search.json` generated search index
+- `public/data/stats.json` generated stats index
+- `artifacts/validation-report.json` generated validation report
+- `.github/workflows/validate-content.yml` CI validation workflow
+- `.github/workflows/release-cli.yml` npm publish workflow for CLI tags
 
-## 7 Categories
-| Category | Emoji | Tailwind Color |
-|----------|-------|----------------|
-| Agents | 🤖 | `text-category-agents` (blue) |
-| Plugins | 🔌 | `text-category-plugins` (purple) |
-| Commands | ⚡ | `text-category-commands` (yellow) |
-| Settings | ⚙️ | `text-category-settings` (gray) |
-| Hooks | 🪝 | `text-category-hooks` (orange) |
-| Integrations | 🔗 | `text-category-integrations` (green) |
-| Templates | 🎨 | `text-category-templates` (pink) |
+## Content Type Contracts
+- `skill`: `content/skills/<slug>/SKILL.md`
+- `agent`: `content/agents/<slug>/AGENT.md`
+- `command`: `content/commands/<slug>/COMMAND.md`
+- `template`: `content/templates/<slug>/item.yaml` + `files/`
+- `hook`: `content/hooks/<slug>/hook.json` + `README.md`
+- `setting`: `content/settings/<slug>/settings.json` + `README.md`
 
-## Data Layer
-The app currently uses static mock data from `src/lib/data.ts` for all pages. When a PostgreSQL database is connected (via `DATABASE_URL` in `.env`), the API routes can be updated to use Prisma queries instead. The seed file at `prisma/seed.ts` populates the database with matching data.
+Slugs must be lowercase kebab-case. IDs must match `<type>.<slug>`.
 
-## Key Patterns
-- All client components use `'use client'` directive
-- Search uses 300ms debounce via `useEffect` + `setTimeout`
-- Stack Builder persists to localStorage via Zustand `persist` middleware
-- Download tracking fires `POST /api/analytics/download` on copy-command click
-- Blog posts render markdown with syntax-highlighted code blocks
-- The `[category]` dynamic route handles all 7 category pages
+## Core Commands
+- `npm run validate:content`
+- `npm run build:index`
+- `npm run lint`
+- `npm run build`
 
-## Deployment
+## CLI Commands
+- `npm run cli -- doctor`
+- `npm run cli -- list --type skill --limit 2`
+- `npm run cli -- search "refactor"`
+- `npm run cli -- info agent refactor-review`
+- `npm run cli -- install template nextjs-codex-starter --target ./sandbox --dry-run`
+- Pinned install:
+  - `npm run cli -- install template nextjs-codex-starter --target ./sandbox --ref <tag-or-commit> --dry-run`
 
-**Production server**: Singapore — `167.71.205.41`  
-**Live URL**: `http://167.71.205.41`  
-**App directory**: `/opt/codex-marketplace`  
-**Process manager**: PM2 (`codex-marketplace`, port `3001`)  
-**Reverse proxy**: Nginx → port 80  
+## GitHub Automation and Governance
+- `main` branch protection is enabled.
+- `main` requires pull requests before merge.
+- Required status check on `main`: `validate`.
+- `.github/CODEOWNERS` routes ownership to `@FunkyBlend` for repo-critical paths.
+- Repo Actions variables expected:
+  - `CATALOG_REPO`
+  - `CATALOG_BRANCH`
+- Repo Actions secret required for CLI release:
+  - `NPM_TOKEN`
 
-### SSH Access
-Server is jump-hosted via New York:
-```bash
-ssh -J flashadmin@159.65.246.230 flashadmin@167.71.205.41
-```
+## Release Flow (CLI)
+1. Bump `cli/package.json` version.
+2. Push commit to `main`.
+3. Push tag `cli-v<version>` (must match `cli/package.json` version).
+4. Workflow `.github/workflows/release-cli.yml` validates and publishes to npm.
 
-### Useful PM2 Commands
-```bash
-pm2 status                  # Check if app is running
-pm2 logs codex-marketplace  # View app logs
-pm2 restart codex-marketplace
-```
+## Working Rules for Updates
+- Any change under `content/`, `schemas/`, `scripts/`, or app code that affects catalog output should be followed by:
+  1. `npm run validate:content`
+  2. `npm run build:index`
+  3. `npm run lint`
+  4. `npm run build`
+- Commit regenerated artifacts when they change:
+  - `public/data/index.json`
+  - `public/data/search.json`
+  - `public/data/stats.json`
+  - `artifacts/validation-report.json`
 
-### Re-deploy (from project root on Windows)
-```bash
-# 1. Create source archive (excludes node_modules, .next, .git, .env)
-tar -czf "$env:TEMP\codex.tar.gz" --exclude='./.next' --exclude='./node_modules' --exclude='./.git' --exclude='./.env' .
-
-# 2. Upload via jump host
-scp -o "ProxyJump=flashadmin@159.65.246.230" "$env:TEMP\codex.tar.gz" flashadmin@167.71.205.41:/opt/codex-marketplace/codex.tar.gz
-
-# 3. SSH in and run
-ssh -J flashadmin@159.65.246.230 flashadmin@167.71.205.41
-cd /opt/codex-marketplace && tar -xzf codex.tar.gz && rm codex.tar.gz
-npm ci && npm run build
-pm2 restart codex-marketplace
-```
-
-### Key Deploy Files
-- `ecosystem.config.js` — PM2 config (port 3001, 1 instance)
-- `deploy/nginx-codex.conf` — Nginx reverse proxy config
-- `deploy/server-setup.sh` — First-time server setup script
-- `deploy/.env.production` — Production env (no DB needed; app uses static mock data)
-
-### Notes
-- `autoprefixer`, `postcss`, `tailwindcss` are in `dependencies` (not devDependencies) — Next.js needs them at build time
-- No database configured; app runs entirely on static mock data from `src/lib/data.ts`
+## Notes
+- Prefer static catalog flow for MVP behavior.
+- Keep repo metadata and links pinned to `FunkyBlend/codex-templates`.
+- If workflow job names change, update branch protection required checks accordingly.
