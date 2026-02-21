@@ -1,0 +1,15 @@
+--- src/components/BrowseClient.tsx
++++ src/components/BrowseClient.tsx
+@@ -219,6 +219,7 @@
+               </Link>
+               <CopyButton
+                 text={item.install_hint}
+                 label="Copy Install"
+                 analyticsId={item.id}
+               />
++              <div className="flex-1 text-right">
++                <AddToStackButton item={item} />
++              </div>
+             </div>
+           </article>
+         ))}

@@ -1,0 +1,41 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#05070a"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10a37f"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background squircle -->
+  <rect width="512" height="512" rx="112" ry="112" fill="url(#bgGrad)" />
+  <rect width="504" height="504" x="4" y="4" rx="108" ry="108" fill="none" stroke="#30363d" stroke-width="8" />
+
+  <g transform="translate(100, 66)" filter="url(#glow)">
+    <!-- Depot Box Base -->
+    <!-- Top Face -->
+    <path d="M 156 220 L 312 130 L 156 40 L 0 130 Z" fill="rgba(37, 99, 235, 0.15)" stroke="url(#accentGrad)" stroke-width="20" stroke-linejoin="round"/>
+    <!-- Left Face -->
+    <path d="M 0 130 L 0 250 L 156 340 L 156 220 Z" fill="rgba(16, 163, 127, 0.15)" stroke="url(#accentGrad)" stroke-width="20" stroke-linejoin="round"/>
+    <!-- Right Face -->
+    <path d="M 312 130 L 312 250 L 156 340 L 156 220 Z" fill="rgba(37, 99, 235, 0.15)" stroke="url(#accentGrad)" stroke-width="20" stroke-linejoin="round"/>
+    
+    <!-- Inner lines of the box -->
+    <path d="M 156 220 L 156 340" fill="none" stroke="url(#accentGrad)" stroke-width="20" stroke-linejoin="round"/>
+
+    <!-- Code Bracket "<" inside the left face -->
+    <path d="M 110 200 L 60 230 L 110 260" fill="none" stroke="#e6edf3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Code Bracket ">" inside the right face -->
+    <path d="M 202 200 L 252 230 L 202 260" fill="none" stroke="#e6edf3" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
