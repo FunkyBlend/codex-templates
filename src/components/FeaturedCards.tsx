@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 
 export function FeaturedCards() {
   const featured = [
@@ -30,27 +29,20 @@ export function FeaturedCards() {
   ];
 
   return (
-    <section className="w-full mt-12 mb-8">
-      <h2 className="text-xl font-mono font-bold mb-4 text-white">Featured</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <section className="rounded-lg border border-dark-border bg-dark-card p-6">
+      <h2 className="mb-5 text-xl font-semibold text-dark-text">Featured Items</h2>
+      <div className="grid gap-4 md:grid-cols-3">
         {featured.map((item) => (
           <Link 
             key={item.id} 
             href={item.url}
-            className="flex items-center justify-between p-4 bg-transparent border border-dark-border rounded hover:border-dark-muted transition-colors group"
+            className="flex flex-col p-4 rounded-lg border border-dark-border bg-dark-bg hover:border-accent-green transition-colors group"
           >
-            <div className="flex items-center gap-4">
-              <div className="text-3xl bg-dark-card w-12 h-12 flex items-center justify-center rounded border border-dark-border">
-                {item.logo}
-              </div>
-              <div className="flex flex-col">
-                <h3 className="font-bold text-white text-lg">{item.title}</h3>
-                <p className="text-xs text-dark-muted font-mono">{item.subtitle}</p>
-              </div>
+            <div className="text-3xl mb-3 h-12 w-12 flex items-center justify-center rounded-lg border border-dark-border bg-dark-card">
+              {item.logo}
             </div>
-            <div className="text-dark-muted group-hover:text-accent-green transition-colors font-mono">
-              →
-            </div>
+            <h3 className="font-semibold text-dark-text group-hover:text-accent-green transition-colors">{item.title}</h3>
+            <p className="text-sm text-dark-muted mt-1">{item.subtitle}</p>
           </Link>
         ))}
       </div>
