@@ -1,17 +1,15 @@
 'use client';
 
 import { useStackBuilder } from '@/store/stackBuilder';
-import { CATEGORIES, getCategoryInfo } from '@/lib/types';
-import { Copy, X, Trash2, Share2, Check } from 'lucide-react';
+import { CATEGORIES } from '@/lib/types';
+import { Copy, Trash2, X } from 'lucide-react';
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 import { copyToClipboard } from '@/lib/clipboard';
 
-export function StackBuilder() {
-  const { items, removeItem, clearAll, getCommand, getCategoryCounts } = useStackBuilder();
+export function StackBuilderSidebar() {
+  const { items, removeItem, clearAll, getCommand } = useStackBuilder();
   const [copied, setCopied] = useState(false);
   const command = getCommand();
-  const counts = getCategoryCounts();
 
   const copyCommand = async () => {
     if (!command) return;
@@ -27,153 +25,96 @@ export function StackBuilder() {
   };
 
   return (
-    <div className="card p-4">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="font-semibold text-dark-text text-sm">Stack Builder</h3>
-        <span className="text-xs text-dark-muted">{items.length} items</span>
+    <div className="w-full flex flex-col font-mono text-sm">
+      <div className="flex items-center justify-between border-b border-dark-border pb-3 mb-6">
+        <h3 className="font-bold text-white text-lg">Stack Builder</h3>
+        {items.length > 0 && (
+          <button
+            onClick={clearAll}
+            className="text-dark-muted hover:text-red-400 text-[10px] uppercase tracking-wider flex items-center gap-1 transition-colors"
+          >
+            Clear All ({items.length})
+          </button>
+        )}
       </div>
 
-      {/* Category counts */}
-      <div className="space-y-1.5 mb-4">
+      {items.length === 0 && (
+        <div className="flex flex-col text-dark-muted mb-8 text-xs gap-1">
+          <span className="text-xl mb-1">🛒</span>
+          <p className="font-bold text-white">Your stack is empty</p>
+          <p className="leading-relaxed opacity-70">Add agents, commands, settings, hooks, or skills to build your development stack</p>
+        </div>
+      )}
+
+      <div className="flex flex-col gap-6">
         {CATEGORIES.map(cat => {
-          const count = counts[cat.slug] || 0;
-          if (count === 0) return null;
+          const catItems = items.filter(i => i.category === cat.slug);
+          
           return (
-            <div key={cat.slug} className="flex items-center justify-between text-xs">
-              <span className="text-dark-muted">
-                {cat.emoji} {cat.name}
-              </span>
-              <span className="text-dark-text font-mono">{count}</span>
+            <div key={cat.slug} className="flex flex-col gap-2">
+              <h4 className={`font-bold text-[13px] flex items-center gap-2 ${catItems.length > 0 ? 'text-white' : 'text-dark-muted'}`}>
+                <span>{cat.emoji}</span> {cat.name} ({catItems.length})
+              </h4>
+              
+              {catItems.length > 0 && (
+                <div className="flex flex-col gap-1.5 pl-[1.6rem]">
+                  {catItems.map(item => (
+                    <div key={item.id} className="flex items-center justify-between text-dark-muted hover:text-white transition-colors group">
+                      <span className="truncate pr-2 text-xs">{item.name}</span>
+                      <button
+                        onClick={() => removeItem(item.id)}
+                        className="text-dark-muted hover:text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label={`Remove ${item.name}`}
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           );
         })}
+
+        {items.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-dark-border">
+            <div className="text-xs text-dark-muted mb-2">Generated Command:</div>
+            <div className="bg-black border border-dark-border rounded p-3 text-accent-green text-[11px] break-all relative group mb-4">
+              {command}
+              <button 
+                onClick={copyCommand}
+                className="absolute right-2 top-2 bg-dark-card border border-dark-border px-2 py-1 rounded text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 hover:border-accent-green hover:text-accent-green"
+              >
+                {copied ? "Copied" : "Copy"}
+              </button>
+            </div>
+
+            <div className="text-[11px] text-dark-muted leading-relaxed mb-4">
+              <strong className="text-white block mb-1">Instructions:</strong> Navigate to your project root and run the generated command. All selected components will be installed automatically.
+            </div>
+
+            <button 
+              onClick={copyCommand}
+              className="w-full bg-accent-green hover:bg-accent-green-hover text-black font-bold py-2 rounded transition-colors flex items-center justify-center gap-2 mb-2"
+            >
+              <Copy size={14} />
+              {copied ? "Copied!" : "Copy Command"}
+            </button>
+            
+            <button 
+              onClick={shareToX}
+              className="w-full bg-transparent border border-dark-border hover:border-white text-dark-muted hover:text-white font-bold py-2 rounded transition-colors text-xs flex justify-center items-center gap-2"
+            >
+              Share Stack
+            </button>
+          </div>
+        )}
       </div>
-
-      {/* Items list */}
-      {items.length > 0 ? (
-        <div className="space-y-2 mb-4 max-h-60 overflow-y-auto">
-          {items.map(item => {
-            const cat = getCategoryInfo(item.category);
-            return (
-              <div key={item.id} className="flex items-center justify-between bg-dark-bg rounded px-2 py-1.5 group">
-                <span className="text-xs text-dark-text truncate flex-1">
-                  {cat?.emoji} {item.name}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => removeItem(item.id)}
-                  aria-label={`Remove ${item.name} from stack`}
-                  className="text-dark-muted hover:text-red-400 opacity-0 group-hover:opacity-100 transition-all ml-2"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <p className="text-dark-muted text-xs text-center py-6">
-          Click &quot;+ Add&quot; on any component to build your stack
-        </p>
-      )}
-
-      {/* Command output */}
-      {command && (
-        <div className="mb-3">
-          <div className="bg-dark-bg rounded-lg p-3 font-mono text-xs text-accent-green break-all border border-dark-border">
-            {command}
-          </div>
-          <div className="flex gap-2 mt-2">
-            <button type="button" onClick={copyCommand} className="btn-primary text-xs flex-1 flex items-center justify-center gap-1.5 py-1.5">
-              {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-              {copied ? 'Copied!' : 'Copy'}
-            </button>
-            <button type="button" onClick={shareToX} className="btn-secondary text-xs px-3 py-1.5" title="Share to X" aria-label="Share stack to X">
-              <Share2 className="w-3 h-3" />
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Actions */}
-      {items.length > 0 && (
-        <button
-          type="button"
-          onClick={clearAll}
-          className="text-dark-muted hover:text-red-400 text-xs flex items-center gap-1 transition-colors w-full justify-center mt-2"
-        >
-          <Trash2 className="w-3 h-3" />
-          Clear All
-        </button>
-      )}
     </div>
   );
 }
 
+// Keep the persistent one for mobile view, exporting it unchanged to not break dependencies
 export function PersistentStackBuilder() {
-  const { items } = useStackBuilder();
-  const [open, setOpen] = useState(false);
-
-  if (items.length === 0) return null;
-
-  return (
-    <>
-      <AnimatePresence>
-        {!open && (
-          <motion.button
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setOpen(true)}
-            aria-label={`Open stack builder with ${items.length} items`}
-            className="fixed bottom-6 right-6 bg-accent-green text-[#0d1117] rounded-full w-14 h-14 flex items-center justify-center shadow-[0_0_20px_rgba(16,163,127,0.3)] z-40 border border-green-400 group"
-          >
-            <span className="font-bold text-lg font-mono">{items.length}</span>
-          </motion.button>
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {open && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-40 md:hidden"
-              onClick={() => setOpen(false)}
-            />
-            <motion.div
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="fixed bottom-0 md:bottom-6 left-0 right-0 md:left-auto md:right-6 bg-[#0d1117] md:rounded-xl rounded-t-2xl p-0 w-full md:w-[350px] max-h-[80vh] md:max-h-[600px] overflow-hidden border border-gray-800 shadow-[0_0_40px_rgba(0,0,0,0.5)] z-50 flex flex-col ring-1 ring-white/5"
-            >
-              <div className="flex justify-between items-center p-4 border-b border-gray-800 bg-[#161b22]">
-                <h3 className="font-bold text-white text-sm flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse"></span>
-                  Active Stack
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => setOpen(false)}
-                  className="text-gray-500 hover:text-white transition-colors p-1"
-                  aria-label="Close stack builder"
-                >
-                  <span className="sr-only">Close stack builder</span>
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="p-4 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-800">
-                <StackBuilder />
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </>
-  );
+  return null; // For MVP, we use the sidebar layout. Mobile view can be added back if needed later.
 }

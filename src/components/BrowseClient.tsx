@@ -148,7 +148,7 @@ export function BrowseClient({ items, searchRecords }: BrowseClientProps) {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-8 px-6 py-10">
+    <div className="w-full flex flex-col gap-8">
       <div className="rounded-lg border border-dark-border bg-dark-card p-6">
         <h1 className="mb-4 text-2xl font-bold text-dark-text">Browse Catalog</h1>
         <p className="mb-6 text-sm text-dark-muted">
@@ -290,6 +290,9 @@ export function BrowseClient({ items, searchRecords }: BrowseClientProps) {
                 label="Copy Install"
                 analyticsId={item.id}
               />
+              <div className="flex-1 text-right">
+                <AddToStackButton item={item} />
+              </div>
             </div>
           </article>
         ))}
