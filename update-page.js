@@ -1,40 +1,6 @@
-import Link from "next/link";
-import Image from "next/image";
-import { CopyButton } from "@/components/CopyButton";
-import { getCatalogIndex, getStatsIndex } from "@/lib/catalog-data";
-import type { CatalogItemType } from "@/lib/catalog-types";
+const fs = require('fs');
 
-const TYPE_LABELS: Record<CatalogItemType, string> = {
-  skill: "Skills",
-  agent: "Agents",
-  command: "Commands",
-  template: "Templates",
-  hook: "Hooks",
-  setting: "Settings",
-};
-
-export default async function HomePage() {
-  const [index, stats] = await Promise.all([getCatalogIndex(), getStatsIndex()]);
-  const repository = index.source.repository || "FunkyBlend/codex-templates";
-  const badgeUrls = {
-    stars: `https://img.shields.io/github/stars/${repository}?style=for-the-badge`,
-    license: `https://img.shields.io/github/license/${repository}?style=for-the-badge`,
-    items: `https://img.shields.io/badge/items-${stats.totals.items}-success?style=for-the-badge`,
-    cli: "https://img.shields.io/badge/CLI-v0.1.0-blue?style=for-the-badge",
-  };
-  const latestItems = [...index.items]
-    .sort((left, right) => right.updated_at.localeCompare(left.updated_at))
-    .slice(0, 6);
-
-  const typeCards = Object.entries(stats.totals.by_type)
-    .map(([type, count]) => ({
-      type: type as CatalogItemType,
-      count,
-    }))
-    .sort((left, right) => right.count - left.count);
-
-  return (
-
+const replacement = `
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-6 py-12">
       {/* Hero Section */}
       <section className="relative overflow-hidden rounded-2xl border border-dark-border bg-dark-card p-10 text-center shadow-2xl">
@@ -68,10 +34,10 @@ export default async function HomePage() {
         </form>
 
         <div className="relative flex flex-wrap items-center justify-center gap-3">
-          <a href={`https://github.com/${repository}`} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <a href={\`https://github.com/\${repository}\`} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
             <Image src={badgeUrls.stars} alt="GitHub stars badge" width={110} height={28} unoptimized className="rounded" />
           </a>
-          <a href={`https://github.com/${repository}`} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <a href={\`https://github.com/\${repository}\`} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
             <Image src={badgeUrls.license} alt="License badge" width={110} height={28} unoptimized className="rounded" />
           </a>
           <Image src={badgeUrls.items} alt="Validated items badge" width={110} height={28} unoptimized className="rounded" />
@@ -100,7 +66,7 @@ export default async function HomePage() {
             <p className="text-4xl font-bold text-white mb-4">{entry.count}</p>
             
             <Link
-              href={`/browse?type=${entry.type}`}
+              href={\`/browse?type=\${entry.type}\`}
               className="inline-flex items-center gap-2 text-sm font-medium text-accent-green group-hover:underline"
             >
               Explore {TYPE_LABELS[entry.type]} →
@@ -141,7 +107,7 @@ export default async function HomePage() {
                 <div className="mb-5 flex flex-wrap gap-2">
                   {item.tags.map((tag) => (
                     <span
-                      key={`${item.id}-${tag}`}
+                      key={\`\${item.id}-\${tag}\`}
                       className="rounded border border-dark-border bg-dark-card px-2 py-0.5 text-[11px] font-medium text-dark-muted"
                     >
                       #{tag}
@@ -186,3 +152,9 @@ export default async function HomePage() {
     </div>
   );
 }
+`;
+
+let code = fs.readFileSync('src/app/page.tsx', 'utf8');
+const startIndex = code.indexOf('    <div className="mx-auto');
+const startPart = code.substring(0, startIndex);
+fs.writeFileSync('src/app/page.tsx', startPart + replacement);
