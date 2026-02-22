@@ -1,0 +1,14 @@
+{
+  "id": "setting.codex-quality-profile",
+  "type": "setting",
+  "title": "Codex Quality Profile",
+  "summary": "Recommended quality defaults for repository review and validation.",
+  "tags": ["settings", "quality", "defaults"],
+  "author": "@codexdepot",
+  "license": "MIT",
+  "compatibility": ["codex-cli", "vscode"],
+  "updated_at": "2026-02-20",
+  "target_tool": "codex-cli",
+  "schema_version": "1.0.0"
+}
+

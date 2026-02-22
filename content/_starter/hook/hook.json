@@ -1,0 +1,15 @@
+{
+  "id": "hook.your-hook-slug",
+  "type": "hook",
+  "title": "Your Hook Title",
+  "summary": "One sentence describing this hook.",
+  "tags": ["hook", "automation", "codex"],
+  "author": "@your-handle",
+  "license": "MIT",
+  "compatibility": ["codex-cli"],
+  "updated_at": "2026-02-20",
+  "trigger": "pre-commit",
+  "runtime": "node",
+  "permissions": ["read_repo"]
+}
+

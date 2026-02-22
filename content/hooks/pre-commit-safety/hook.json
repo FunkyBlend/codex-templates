@@ -1,0 +1,15 @@
+{
+  "id": "hook.pre-commit-safety",
+  "type": "hook",
+  "title": "Pre-Commit Safety Hook",
+  "summary": "Runs lightweight safety checks before committing code.",
+  "tags": ["hook", "safety", "git"],
+  "author": "@codexdepot",
+  "license": "MIT",
+  "compatibility": ["codex-cli"],
+  "updated_at": "2026-02-20",
+  "trigger": "pre-commit",
+  "runtime": "node",
+  "permissions": ["read_repo"]
+}
+

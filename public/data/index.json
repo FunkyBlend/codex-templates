@@ -1,0 +1,183 @@
+{
+  "index_version": "1.0.0",
+  "generated_at": "2026-02-20T20:59:25.619Z",
+  "total_items": 6,
+  "source": {
+    "repository": "FunkyBlend/codex-templates",
+    "branch": "main"
+  },
+  "items": [
+    {
+      "id": "skill.commit-message-helper",
+      "type": "skill",
+      "slug": "commit-message-helper",
+      "title": "Commit Message Helper",
+      "summary": "Generate conventional commit messages from staged git changes.",
+      "tags": [
+        "git",
+        "commits",
+        "productivity"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli",
+        "vscode"
+      ],
+      "updated_at": "2026-02-20",
+      "difficulty": "beginner",
+      "source_url": "https://github.com/openai/codex",
+      "content_version": "local",
+      "content_path": "content/skills/commit-message-helper/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/commit-message-helper/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/commit-message-helper/SKILL.md",
+      "route": "/items/skill/commit-message-helper",
+      "install_hint": "codexdepot install skill commit-message-helper",
+      "render_excerpt": "Commit Message Helper Usage 1. Run . 2. Summarize the change in one sentence. 3. Output a Conventional Commit in format. Notes Prefer , , , , , or . Keep the subject line under 72 characters.",
+      "body": "# Commit Message Helper\n\n## Usage\n1. Run `git diff --staged`.\n2. Summarize the change in one sentence.\n3. Output a Conventional Commit in `type(scope): message` format.\n\n## Notes\n- Prefer `feat`, `fix`, `docs`, `refactor`, `test`, or `chore`.\n- Keep the subject line under 72 characters."
+    },
+    {
+      "id": "agent.refactor-review",
+      "type": "agent",
+      "slug": "refactor-review",
+      "title": "Refactor Review Agent",
+      "summary": "Reviews refactors for behavior regressions and missing tests.",
+      "tags": [
+        "review",
+        "refactor",
+        "testing"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli"
+      ],
+      "updated_at": "2026-02-20",
+      "difficulty": "intermediate",
+      "content_version": "local",
+      "content_path": "content/agents/refactor-review/AGENT.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/agents/refactor-review/AGENT.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/agents/refactor-review/AGENT.md",
+      "route": "/items/agent/refactor-review",
+      "install_hint": "codexdepot install agent refactor-review",
+      "render_excerpt": "Refactor Review Agent Usage Prompt this agent with a diff and ask for: 1. Behavior regressions. 2. Risky edge cases. 3. Missing tests before merge. Prompt You are a strict code reviewer focused on regressions, risks, and",
+      "body": "# Refactor Review Agent\n\n## Usage\nPrompt this agent with a diff and ask for:\n1. Behavior regressions.\n2. Risky edge cases.\n3. Missing tests before merge.\n\n## Prompt\nYou are a strict code reviewer focused on regressions, risks, and missing tests."
+    },
+    {
+      "id": "command.issue-triage",
+      "type": "command",
+      "slug": "issue-triage",
+      "title": "Issue Triage Command",
+      "summary": "Classify incoming issues by severity, area, and next action.",
+      "tags": [
+        "triage",
+        "support",
+        "workflow"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli",
+        "github"
+      ],
+      "updated_at": "2026-02-20",
+      "difficulty": "beginner",
+      "content_version": "local",
+      "content_path": "content/commands/issue-triage/COMMAND.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/commands/issue-triage/COMMAND.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/commands/issue-triage/COMMAND.md",
+      "route": "/items/command/issue-triage",
+      "install_hint": "codexdepot install command issue-triage",
+      "render_excerpt": "Issue Triage Command Usage 1. Label issue type: , , or . 2. Set severity: , , , or . 3. Assign owner and recommend immediate next action. Output Contract Return a compact JSON object with , , , and .",
+      "body": "# Issue Triage Command\n\n## Usage\n1. Label issue type: `bug`, `feature`, or `question`.\n2. Set severity: `low`, `medium`, `high`, or `critical`.\n3. Assign owner and recommend immediate next action.\n\n## Output Contract\nReturn a compact JSON object with `type`, `severity`, `owner`, and `next_action`."
+    },
+    {
+      "id": "template.nextjs-codex-starter",
+      "type": "template",
+      "slug": "nextjs-codex-starter",
+      "title": "Next.js Codex Starter",
+      "summary": "Minimal Next.js starter with Codex-friendly prompt and docs structure.",
+      "tags": [
+        "nextjs",
+        "starter",
+        "codex"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli",
+        "vscode"
+      ],
+      "updated_at": "2026-02-20",
+      "difficulty": "beginner",
+      "source_url": "https://nextjs.org",
+      "content_version": "local",
+      "content_path": "content/templates/nextjs-codex-starter/item.yaml",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/templates/nextjs-codex-starter/item.yaml",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/templates/nextjs-codex-starter/item.yaml",
+      "route": "/items/template/nextjs-codex-starter",
+      "install_hint": "codexdepot install template nextjs-codex-starter",
+      "render_excerpt": "Next.js Codex Starter Usage 1. Copy the files under into your project root. 2. Run . 3. Start with . 4. Use the included prompt file to bootstrap Codex workflows.",
+      "body": "# Next.js Codex Starter\n\n## Usage\n1. Copy the files under `files/` into your project root.\n2. Run `npm install`.\n3. Start with `npm run dev`.\n4. Use the included prompt file to bootstrap Codex workflows.",
+      "template_version": "1.0.0",
+      "install_path": ".",
+      "entry_files": [
+        "package.json",
+        "src/prompts/starter.md"
+      ]
+    },
+    {
+      "id": "hook.pre-commit-safety",
+      "type": "hook",
+      "slug": "pre-commit-safety",
+      "title": "Pre-Commit Safety Hook",
+      "summary": "Runs lightweight safety checks before committing code.",
+      "tags": [
+        "hook",
+        "safety",
+        "git"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli"
+      ],
+      "updated_at": "2026-02-20",
+      "content_version": "local",
+      "content_path": "content/hooks/pre-commit-safety/hook.json",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/hooks/pre-commit-safety/hook.json",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/hooks/pre-commit-safety/hook.json",
+      "route": "/items/hook/pre-commit-safety",
+      "install_hint": "codexdepot install hook pre-commit-safety",
+      "render_excerpt": "Pre Commit Safety Hook Usage Run this hook before each commit to verify quick static checks and formatting rules.",
+      "body": "# Pre-Commit Safety Hook\n\n## Usage\nRun this hook before each commit to verify quick static checks and formatting rules."
+    },
+    {
+      "id": "setting.codex-quality-profile",
+      "type": "setting",
+      "slug": "codex-quality-profile",
+      "title": "Codex Quality Profile",
+      "summary": "Recommended quality defaults for repository review and validation.",
+      "tags": [
+        "settings",
+        "quality",
+        "defaults"
+      ],
+      "author": "@codexdepot",
+      "license": "MIT",
+      "compatibility": [
+        "codex-cli",
+        "vscode"
+      ],
+      "updated_at": "2026-02-20",
+      "content_version": "local",
+      "content_path": "content/settings/codex-quality-profile/settings.json",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/settings/codex-quality-profile/settings.json",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/settings/codex-quality-profile/settings.json",
+      "route": "/items/setting/codex-quality-profile",
+      "install_hint": "codexdepot install setting codex-quality-profile",
+      "render_excerpt": "Codex Quality Profile Usage Apply this profile to standardize review strictness, validation defaults, and safety gates.",
+      "body": "# Codex Quality Profile\n\n## Usage\nApply this profile to standardize review strictness, validation defaults, and safety gates."
+    }
+  ]
+}

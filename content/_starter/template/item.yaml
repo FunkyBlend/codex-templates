@@ -1,0 +1,15 @@
+id: template.your-template-slug
+type: template
+title: Your Template Title
+summary: One sentence describing this template.
+tags: [starter, codex, template]
+author: "@your-handle"
+license: MIT
+compatibility: [codex-cli]
+updated_at: 2026-02-20
+difficulty: beginner
+install_path: "."
+entry_files:
+  - package.json
+template_version: 1.0.0
+
