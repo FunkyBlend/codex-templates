@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type {
@@ -51,15 +51,11 @@ export function BrowseClient({ items, searchRecords }: BrowseClientProps) {
     setQuery(qFromUrl);
   }, [qFromUrl]);
 
-  const [isPending, startTransition] = useTransition();
-
   const updateSearchParams = (mutator: (params: URLSearchParams) => void) => {
     const next = new URLSearchParams(searchParams.toString());
     mutator(next);
     const nextValue = next.toString();
-    startTransition(() => {
-      router.replace(nextValue ? `${pathname}?${nextValue}` : pathname, { scroll: false });
-    });
+    router.replace(nextValue ? `${pathname}?${nextValue}` : pathname, { scroll: false });
   };
 
   useEffect(() => {
