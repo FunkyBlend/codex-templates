@@ -1,0 +1,66 @@
+name: Validate Content
+
+on:
+  pull_request:
+    paths:
+      - "content/**"
+      - "schemas/**"
+      - "scripts/**"
+      - "src/**"
+      - "public/data/**"
+      - ".github/workflows/validate-content.yml"
+      - "package.json"
+      - "package-lock.json"
+  push:
+    branches:
+      - main
+    paths:
+      - "content/**"
+      - "schemas/**"
+      - "scripts/**"
+      - "src/**"
+      - "package.json"
+      - "package-lock.json"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    env:
+      CATALOG_REPO: ${{ vars.CATALOG_REPO || 'FunkyBlend/codex-templates' }}
+      CATALOG_BRANCH: ${{ vars.CATALOG_BRANCH || 'main' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate Content
+        run: npm run validate:content
+
+      - name: Verify Generated Index
+        run: CHECK_INDEX=true npm run build:index
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Secret Scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Validation Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-report
+          path: artifacts/validation-report.json
+          if-no-files-found: ignore

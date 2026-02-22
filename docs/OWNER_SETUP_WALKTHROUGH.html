@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodexDepot Repo Operations</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b1020;
+        --card: #111a2e;
+        --text: #e6ecff;
+        --muted: #a7b3d9;
+        --accent: #57d2a3;
+        --border: #293551;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.45;
+      }
+      .wrap {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 28px 18px 56px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+      h1, h2 {
+        margin-top: 0;
+      }
+      h1 {
+        font-size: 1.9rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+        color: var(--accent);
+      }
+      code, pre {
+        font-family: Consolas, Monaco, "Courier New", monospace;
+      }
+      pre {
+        overflow: auto;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: #0a1326;
+      }
+      .muted {
+        color: var(--muted);
+      }
+      .ok {
+        color: var(--accent);
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>CodexDepot Repository Operations</h1>
+      <p class="muted">
+        Source repository: <code>https://github.com/FunkyBlend/codex-templates</code>.
+      </p>
+
+      <section class="card">
+        <h2>1. Required GitHub Variables</h2>
+        <p>Add repository variables:</p>
+        <ul>
+          <li><code>CATALOG_REPO=FunkyBlend/codex-templates</code></li>
+          <li><code>CATALOG_BRANCH=main</code></li>
+        </ul>
+        <p class="muted">
+          Workflows also include safe defaults to these values, so CI remains deterministic.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>2. Branch Protection (main)</h2>
+        <ul>
+          <li>Require pull request before merge.</li>
+          <li>Require at least 1 approval.</li>
+          <li>Require status checks to pass before merge.</li>
+          <li>Required check: <code>Validate Content / validate</code>.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>3. CODEOWNERS</h2>
+        <p>
+          <code>.github/CODEOWNERS</code> assigns repository paths to
+          <code>@FunkyBlend</code>.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>4. CLI npm Release Flow</h2>
+        <ul>
+          <li>Add repository secret <code>NPM_TOKEN</code>.</li>
+          <li>Bump <code>cli/package.json</code> version.</li>
+          <li>Create a tag: <code>cli-v&lt;version&gt;</code> (example <code>cli-v0.1.1</code>).</li>
+          <li>Push tag to trigger <code>.github/workflows/release-cli.yml</code>.</li>
+        </ul>
+        <pre><code>git tag cli-v0.1.1
+git push origin cli-v0.1.1</code></pre>
+        <p class="muted">
+          Workflow enforces that tag version equals <code>cli/package.json</code> version.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>5. Local Verification</h2>
+        <pre><code>npm run validate:content
+npm run build:index
+npm run lint
+npm run build
+npm run cli -- doctor
+npm run cli -- install template nextjs-codex-starter --target ./sandbox --ref main --dry-run</code></pre>
+        <p><span class="ok">Expected:</span> all commands pass and index source shows the real repository identity.</p>
+      </section>
+    </main>
+  </body>
+</html>

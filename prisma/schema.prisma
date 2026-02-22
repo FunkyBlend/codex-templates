@@ -1,0 +1,105 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  agents
+  plugins
+  commands
+  settings
+  hooks
+  integrations
+  templates
+}
+
+enum Difficulty {
+  basic
+  intermediate
+  advanced
+}
+
+model Component {
+  id             String           @id @default(cuid())
+  name           String
+  slug           String           @unique
+  description    String
+  category       Category
+  installCommand String
+  downloads      Int              @default(0)
+  isFeatured     Boolean          @default(false)
+  companyId      String?
+  company        Company?         @relation(fields: [companyId], references: [id])
+  tags           String[]
+  sourceUrl      String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  downloadEvents DownloadEvent[]
+
+  @@map("components")
+}
+
+model Company {
+  id          String      @id @default(cuid())
+  name        String
+  slug        String      @unique
+  description String
+  icon        String
+  websiteUrl  String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  components  Component[]
+
+  @@map("companies")
+}
+
+model FeaturedProject {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  tagline          String
+  description      String
+  logoUrl          String?
+  websiteUrl       String?
+  sponsorName      String?
+  problemStatement String?
+  features         Json?
+  integrations     Json?
+  ctaText          String?
+  ctaUrl           String?
+  isActive         Boolean  @default(true)
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("featured_projects")
+}
+
+model BlogPost {
+  id          String     @id @default(cuid())
+  title       String
+  slug        String     @unique
+  excerpt     String
+  content     String
+  difficulty  Difficulty
+  isFeatured  Boolean    @default(false)
+  publishedAt DateTime   @default(now())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@map("blog_posts")
+}
+
+model DownloadEvent {
+  id          String    @id @default(cuid())
+  componentId String
+  component   Component @relation(fields: [componentId], references: [id])
+  country     String?
+  createdAt   DateTime  @default(now())
+
+  @@map("download_events")
+}

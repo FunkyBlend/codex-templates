@@ -1,0 +1,10 @@
+node_modules/
+.next/
+.env
+.env.local
+.env.*.local
+
+# Local smoke-test output
+artifacts/cli-smoke/
+.agent/
+.claude/

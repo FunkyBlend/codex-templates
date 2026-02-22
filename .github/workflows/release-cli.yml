@@ -1,0 +1,73 @@
+name: Release CLI
+
+on:
+  push:
+    tags:
+      - "cli-v*"
+
+permissions:
+  contents: read
+
+jobs:
+  publish-cli:
+    runs-on: ubuntu-latest
+    env:
+      CATALOG_REPO: ${{ vars.CATALOG_REPO || 'FunkyBlend/codex-templates' }}
+      CATALOG_BRANCH: ${{ vars.CATALOG_BRANCH || 'main' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Validate tag matches CLI package version
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#cli-v}"
+          CLI_VERSION="$(node -p "require('./cli/package.json').version")"
+          if [ "$TAG_VERSION" != "$CLI_VERSION" ]; then
+            echo "Tag version ($TAG_VERSION) does not match cli/package.json version ($CLI_VERSION)."
+            exit 1
+          fi
+
+      - name: Validate Content
+        run: npm run validate:content
+
+      - name: Verify Generated Index
+        run: CHECK_INDEX=true npm run build:index
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: CLI Smoke Checks
+        run: |
+          node cli/bin/codexdepot.js doctor --index ./public/data/index.json
+          node cli/bin/codexdepot.js list --index ./public/data/index.json --type skill --limit 2
+          node cli/bin/codexdepot.js search --index ./public/data/index.json "refactor"
+          node cli/bin/codexdepot.js info --index ./public/data/index.json agent refactor-review
+          node cli/bin/codexdepot.js install --index ./public/data/index.json template nextjs-codex-starter --target ./artifacts/cli-smoke --dry-run
+
+      - name: Ensure NPM_TOKEN is configured
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "NPM_TOKEN secret is required for npm publish."
+            exit 1
+          fi
+
+      - name: Publish CLI to npm
+        working-directory: cli
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --access public

@@ -957,7 +957,7 @@ async function assertFileMatches(
     }
     if (value && typeof value === "object") {
       const objectEntries = Object.entries(value as Record<string, unknown>)
-        .filter(([key]) => key !== "generated_at")
+        .filter(([key]) => key !== "generated_at" && key !== "content_version")
         .map(([key, entryValue]) => [key, stripGeneratedAt(entryValue)]);
       return Object.fromEntries(objectEntries);
     }

@@ -1,0 +1,6 @@
+# Repository owner defaults.
+/content/** @FunkyBlend
+/schemas/** @FunkyBlend
+/scripts/** @FunkyBlend
+/docs/** @FunkyBlend
+/.github/** @FunkyBlend
