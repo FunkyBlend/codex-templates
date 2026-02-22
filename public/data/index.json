@@ -1,6 +1,6 @@
 {
   "index_version": "1.0.0",
-  "generated_at": "2026-02-20T20:59:25.619Z",
+  "generated_at": "2026-02-22T01:26:30.057Z",
   "total_items": 6,
   "source": {
     "repository": "FunkyBlend/codex-templates",
@@ -34,7 +34,7 @@
       "route": "/items/skill/commit-message-helper",
       "install_hint": "codexdepot install skill commit-message-helper",
       "render_excerpt": "Commit Message Helper Usage 1. Run . 2. Summarize the change in one sentence. 3. Output a Conventional Commit in format. Notes Prefer , , , , , or . Keep the subject line under 72 characters.",
-      "body": "# Commit Message Helper\n\n## Usage\n1. Run `git diff --staged`.\n2. Summarize the change in one sentence.\n3. Output a Conventional Commit in `type(scope): message` format.\n\n## Notes\n- Prefer `feat`, `fix`, `docs`, `refactor`, `test`, or `chore`.\n- Keep the subject line under 72 characters."
+      "body": "# Commit Message Helper\r\n\r\n## Usage\r\n1. Run `git diff --staged`.\r\n2. Summarize the change in one sentence.\r\n3. Output a Conventional Commit in `type(scope): message` format.\r\n\r\n## Notes\r\n- Prefer `feat`, `fix`, `docs`, `refactor`, `test`, or `chore`.\r\n- Keep the subject line under 72 characters."
     },
     {
       "id": "agent.refactor-review",
@@ -61,7 +61,7 @@
       "route": "/items/agent/refactor-review",
       "install_hint": "codexdepot install agent refactor-review",
       "render_excerpt": "Refactor Review Agent Usage Prompt this agent with a diff and ask for: 1. Behavior regressions. 2. Risky edge cases. 3. Missing tests before merge. Prompt You are a strict code reviewer focused on regressions, risks, and",
-      "body": "# Refactor Review Agent\n\n## Usage\nPrompt this agent with a diff and ask for:\n1. Behavior regressions.\n2. Risky edge cases.\n3. Missing tests before merge.\n\n## Prompt\nYou are a strict code reviewer focused on regressions, risks, and missing tests."
+      "body": "# Refactor Review Agent\r\n\r\n## Usage\r\nPrompt this agent with a diff and ask for:\r\n1. Behavior regressions.\r\n2. Risky edge cases.\r\n3. Missing tests before merge.\r\n\r\n## Prompt\r\nYou are a strict code reviewer focused on regressions, risks, and missing tests."
     },
     {
       "id": "command.issue-triage",
@@ -89,7 +89,7 @@
       "route": "/items/command/issue-triage",
       "install_hint": "codexdepot install command issue-triage",
       "render_excerpt": "Issue Triage Command Usage 1. Label issue type: , , or . 2. Set severity: , , , or . 3. Assign owner and recommend immediate next action. Output Contract Return a compact JSON object with , , , and .",
-      "body": "# Issue Triage Command\n\n## Usage\n1. Label issue type: `bug`, `feature`, or `question`.\n2. Set severity: `low`, `medium`, `high`, or `critical`.\n3. Assign owner and recommend immediate next action.\n\n## Output Contract\nReturn a compact JSON object with `type`, `severity`, `owner`, and `next_action`."
+      "body": "# Issue Triage Command\r\n\r\n## Usage\r\n1. Label issue type: `bug`, `feature`, or `question`.\r\n2. Set severity: `low`, `medium`, `high`, or `critical`.\r\n3. Assign owner and recommend immediate next action.\r\n\r\n## Output Contract\r\nReturn a compact JSON object with `type`, `severity`, `owner`, and `next_action`."
     },
     {
       "id": "template.nextjs-codex-starter",
@@ -118,7 +118,7 @@
       "route": "/items/template/nextjs-codex-starter",
       "install_hint": "codexdepot install template nextjs-codex-starter",
       "render_excerpt": "Next.js Codex Starter Usage 1. Copy the files under into your project root. 2. Run . 3. Start with . 4. Use the included prompt file to bootstrap Codex workflows.",
-      "body": "# Next.js Codex Starter\n\n## Usage\n1. Copy the files under `files/` into your project root.\n2. Run `npm install`.\n3. Start with `npm run dev`.\n4. Use the included prompt file to bootstrap Codex workflows.",
+      "body": "# Next.js Codex Starter\r\n\r\n## Usage\r\n1. Copy the files under `files/` into your project root.\r\n2. Run `npm install`.\r\n3. Start with `npm run dev`.\r\n4. Use the included prompt file to bootstrap Codex workflows.",
       "template_version": "1.0.0",
       "install_path": ".",
       "entry_files": [
@@ -150,7 +150,7 @@
       "route": "/items/hook/pre-commit-safety",
       "install_hint": "codexdepot install hook pre-commit-safety",
       "render_excerpt": "Pre Commit Safety Hook Usage Run this hook before each commit to verify quick static checks and formatting rules.",
-      "body": "# Pre-Commit Safety Hook\n\n## Usage\nRun this hook before each commit to verify quick static checks and formatting rules."
+      "body": "# Pre-Commit Safety Hook\r\n\r\n## Usage\r\nRun this hook before each commit to verify quick static checks and formatting rules."
     },
     {
       "id": "setting.codex-quality-profile",
@@ -177,7 +177,7 @@
       "route": "/items/setting/codex-quality-profile",
       "install_hint": "codexdepot install setting codex-quality-profile",
       "render_excerpt": "Codex Quality Profile Usage Apply this profile to standardize review strictness, validation defaults, and safety gates.",
-      "body": "# Codex Quality Profile\n\n## Usage\nApply this profile to standardize review strictness, validation defaults, and safety gates."
+      "body": "# Codex Quality Profile\r\n\r\n## Usage\r\nApply this profile to standardize review strictness, validation defaults, and safety gates."
     }
   ]
 }
