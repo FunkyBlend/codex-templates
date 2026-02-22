@@ -2,517 +2,347 @@
 
 import React, { useState } from 'react';
 import { 
-  Terminal, 
-  Search, 
-  Code2, 
-  Cpu, 
-  ShieldAlert, 
-  Database, 
-  Zap, 
-  ChevronRight, 
-  Github, 
-  Command,
-  Star,
-  Download,
-  Filter,
-  Layers,
-  Copy,
-  Check,
-  Folder,
-  Plus,
-  X
+  Terminal, Search, Copy, Command, Box, Cpu, Zap, Settings, Shield, X, Check, ChevronRight, Globe, Github, Download, Eye, Plus 
 } from 'lucide-react';
 
-interface MockItem {
+interface CodexItem {
   id: number;
-  title: string;
-  author: string;
-  description: string;
+  name: string;
+  type: string;
+  version: string;
   downloads: string;
-  category: string;
+  desc: string;
+  cmd: string;
   tags: string[];
-  icon: React.ReactNode;
-  installCommand: string;
+  readme: string;
 }
 
-// --- MOCK DATA ---
-const categories = [
-  'All', 
-  'skills', 
-  'agents', 
-  'mcps', 
-  'commands', 
-  'hooks'
-];
-
-const mockItems: MockItem[] = [
+const items: CodexItem[] = [
   {
-    id: 1,
-    title: 'Neural Net Scaffolding v2.0',
-    author: '@cyber_ghost',
-    description: 'Pre-configured PyTorch scaffolding for rapid deployment of transformer models with distributed training support.',
-    downloads: '1.2k',
-    category: 'agents',
-    tags: ['Python', 'PyTorch', 'AI'],
-    icon: <Cpu className="w-8 h-8 text-cyan-400" />,
-    installCommand: 'npx codex-cli@latest --skill=agents/neural-net-scaffold --yes'
+      id: 1,
+      name: 'react-architect',
+      type: 'agent',
+      version: '2.4.0',
+      downloads: '12.4k',
+      desc: 'Senior React architecture patterns and folder structure enforcement.',
+      cmd: 'npx codex add react-architect',
+      tags: ['react', 'structure', 'best-practices'],
+      readme: `# React Architect Agent\n\nThis agent enforces strict folder structure...`
   },
-  {
-    id: 2,
-    title: 'Zero-Knowledge Auth Protocol',
-    author: '@0xCryptography',
-    description: 'A complete ZK-rollup authentication flow for Web3 dApps. Completely passwordless and decentralized.',
-    downloads: '8.4k',
-    category: 'hooks',
-    tags: ['Solidity', 'Web3', 'Auth'],
-    icon: <ShieldAlert className="w-8 h-8 text-purple-400" />,
-    installCommand: 'npx codex-cli@latest --skill=hooks/zk-auth-protocol --yes'
+  { 
+      id: 2,
+      name: 'postgres-optimizer',
+      type: 'skill',
+      version: '1.1.2',
+      downloads: '8.1k',
+      desc: 'Analyzes queries and suggests indexes for PostgreSQL databases.',
+      cmd: 'npx codex add pg-opt',
+      tags: ['database', 'sql', 'performance'],
+      readme: `# PostgreSQL Optimizer\n\nA skill that connects to your local...`
   },
-  {
-    id: 3,
-    title: 'Quantum-Resistant Ledger',
-    author: '@node_runner',
-    description: 'Next-generation database schema optimized for post-quantum cryptographic hashing algorithms.',
-    downloads: '450',
-    category: 'mcps',
-    tags: ['Rust', 'PostgreSQL', 'Crypto'],
-    icon: <Database className="w-8 h-8 text-emerald-400" />,
-    installCommand: 'npx codex-cli@latest --skill=mcps/quantum-ledger --yes'
+  { 
+      id: 3,
+      name: 'stripe-mcp',
+      type: 'mcp',
+      version: '3.0.0',
+      downloads: '5.2k',
+      desc: 'Model Context Protocol server for Stripe API integration.',
+      cmd: 'npx codex add stripe-mcp',
+      tags: ['payment', 'api', 'integration'],
+      readme: `# Stripe MCP Server\n\nExposes the Stripe API context...`
   },
-  {
-    id: 4,
-    title: 'Neon Glassmorphism UI Kit',
-    author: '@pixel_shaper',
-    description: 'Over 200 fully responsive, dark-mode first UI components built with Tailwind CSS and Framer Motion.',
-    downloads: '3.1k',
-    category: 'skills',
-    tags: ['React', 'Tailwind', 'UI/UX'],
-    icon: <Layers className="w-8 h-8 text-pink-400" />,
-    installCommand: 'npx codex-cli@latest --skill=skills/neon-ui-kit --yes'
+  { 
+      id: 4,
+      name: 'docker-scaffold',
+      type: 'template',
+      version: '0.9.5',
+      downloads: '9.9k',
+      desc: 'Production-ready Dockerfiles for Node, Python, and Go.',
+      cmd: 'npx codex add docker-tmpl',
+      tags: ['devops', 'containers', 'cicd'],
+      readme: `# Docker Scaffold Template\n\nGenerates multi-stage Dockerfiles...`
   },
-  {
-    id: 5,
-    title: 'LLM Prompt Injection Firewall',
-    author: '@ai_sentinel',
-    description: 'Middleware component to sanitize and block malicious prompt injections before they hit your OpenAI API.',
-    downloads: '920',
-    category: 'commands',
-    tags: ['TypeScript', 'Node.js', 'AI'],
-    icon: <Terminal className="w-8 h-8 text-orange-400" />,
-    installCommand: 'npx codex-cli@latest --skill=commands/llm-firewall --yes'
+  { 
+      id: 5,
+      name: 'security-audit',
+      type: 'agent',
+      version: '1.0.1',
+      downloads: '3.4k',
+      desc: 'Scans code for OWASP vulnerabilities before commit.',
+      cmd: 'npx codex add sec-audit',
+      tags: ['security', 'owasp', 'linter'],
+      readme: `# Security Audit Agent\n\nA proactive security scanner...`
   },
-  {
-    id: 6,
-    title: 'Algorithmic Trading Bot Core',
-    author: '@quant_mechanic',
-    description: 'High-frequency trading bot core logic with built-in backtesting and Binance/Coinbase API integration.',
-    downloads: '310',
-    category: 'agents',
-    tags: ['C++', 'Finance', 'API'],
-    icon: <Zap className="w-8 h-8 text-blue-400" />,
-    installCommand: 'npx codex-cli@latest --skill=agents/algo-trading-core --yes'
+  { 
+      id: 6,
+      name: 'git-commit-semantic',
+      type: 'hook',
+      version: '4.2.0',
+      downloads: '15.1k',
+      desc: 'Enforces semantic commit messages based on diff analysis.',
+      cmd: 'npx codex add git-semantic',
+      tags: ['git', 'workflow', 'automation'],
+      readme: `# Semantic Commit Hook\n\nAnalyzes your staged changes...`
   },
-  {
-    id: 7,
-    title: 'Sentient NLP Agent',
-    author: '@neural_weaver',
-    description: 'An advanced conversational agent framework capable of multi-turn memory and tool use via LangChain.',
-    downloads: '1.5k',
-    category: 'agents',
-    tags: ['Python', 'LangChain', 'NLP'],
-    icon: <Code2 className="w-8 h-8 text-cyan-400" />,
-    installCommand: 'npx codex-cli@latest --skill=agents/sentient-nlp --yes'
+  { 
+      id: 7,
+      name: 'nextjs-15-expert',
+      type: 'agent',
+      version: '15.0.0-rc',
+      downloads: '22k',
+      desc: 'Expert knowledge on Next.js 15 Server Actions and RSCs.',
+      cmd: 'npx codex add next-expert',
+      tags: ['nextjs', 'react', 'web'],
+      readme: `# Next.js 15 Expert Agent\n\nSpecialized in the latest Next.js paradigms...`
   },
-  {
-    id: 8,
-    title: 'Cyberpunk Dashboard Template',
-    author: '@neo_tokyo',
-    description: 'A visually stunning admin dashboard template with glitch effects, neon borders, and real-time chart widgets.',
-    downloads: '12.4k',
-    category: 'skills',
-    tags: ['Vue', 'CSS', 'Dashboard'],
-    icon: <Layers className="w-8 h-8 text-fuchsia-400" />,
-    installCommand: 'npx codex-cli@latest --skill=skills/cyberpunk-dash --yes'
+  { 
+      id: 8,
+      name: 'python-pandas-ai',
+      type: 'skill',
+      version: '2.1.0',
+      downloads: '18.5k',
+      desc: 'Conversational data analysis for Pandas DataFrames.',
+      cmd: 'npx codex add pandas-ai',
+      tags: ['data-science', 'python', 'analytics'],
+      readme: `# Pandas AI Skill\n\nAllows you to ask questions about your dataframes...`
   }
 ];
 
+function IconForType({ type, className = "w-4 h-4" }: { type: string, className?: string }) {
+  switch(type) {
+    case 'agent': return <Cpu className={className} />;
+    case 'skill': return <Zap className={className} />;
+    case 'mcp': return <Settings className={className} />;
+    case 'security': return <Shield className={className} />;
+    case 'template': return <Box className={className} />;
+    case 'hook': return <Command className={className} />;
+    default: return <Box className={className} />;
+  }
+}
+
 export default function App() {
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedItem, setSelectedItem] = useState<MockItem | null>(null);
-  const [copiedId, setCopiedId] = useState<number | string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<CodexItem | null>(null);
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
-  // Filter items based on search and category
-  const filteredItems = mockItems.filter(item => {
-    const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
-    const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          item.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
-
-  // iFrame safe copy function
-  const copyToClipboard = (e: React.MouseEvent, text: string, id: number | string) => {
+  const handleCopy = (e: React.MouseEvent, cmd: string, id: number) => {
     e.stopPropagation();
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    textArea.style.position = "fixed"; // Avoid scrolling
-    document.body.appendChild(textArea);
-    textArea.focus();
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      setCopiedId(id);
-      setTimeout(() => setCopiedId(null), 2000);
-    } catch (err) {
-      console.error('Copy failed', err);
-    }
-    document.body.removeChild(textArea);
+    navigator.clipboard.writeText(cmd);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 2000);
   };
 
+  const filteredItems = items.filter(item =>
+    (activeCategory === 'all' || item.type === activeCategory) &&
+    (item.name.toLowerCase().includes(search.toLowerCase()) ||  
+     item.desc.toLowerCase().includes(search.toLowerCase()) ||
+     item.tags.some(t => t.toLowerCase().includes(search.toLowerCase())))
+  );
+
   return (
-    <div className="min-h-screen bg-[#030305] text-slate-300 font-sans selection:bg-cyan-500/30 selection:text-cyan-100 relative overflow-hidden">
-      
-      {/* --- BACKGROUND EFFECTS --- */}
-      {/* Subtle grid pattern */}
-      <div className="fixed inset-0 z-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
-      {/* Ambient glowing orbs */}
-      <div className="fixed top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-cyan-900/20 blur-[120px] pointer-events-none"></div>
-      <div className="fixed bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-900/20 blur-[120px] pointer-events-none"></div>
+    <div className="min-h-screen bg-[#05070a] text-gray-300 font-mono flex flex-col relative overflow-hidden selection:bg-green-900 selection:text-white">
 
-      <div className="relative z-10 flex flex-col min-h-screen">
-        
-        {/* --- NAVBAR --- */}
-        <header className="sticky top-0 z-50 border-b border-white/5 bg-[#030305]/80 backdrop-blur-md">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex items-center space-x-2 cursor-pointer group">
-              <div className="w-8 h-8 bg-cyan-500/10 rounded-md border border-cyan-500/30 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
-                <Terminal className="w-5 h-5 text-cyan-400" />
-              </div>
-              <span className="font-mono font-bold text-xl tracking-wider text-white">
-                C<span className="text-cyan-400">O</span>DEX
-              </span>
+      {/* Top Navigation */}
+      <header className="border-b border-gray-800/60 bg-[#0d1117]/80 backdrop-blur-md sticky top-0 z-30">
+        <div className="max-w-[1600px] mx-auto px-6 h-16 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="bg-green-900/10 p-2 rounded border border-green-500/20 shadow-[0_0_15px_rgba(34,197,94,0.1)]">
+               <Terminal size={18} className="text-green-500" />
             </div>
-
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex space-x-8">
-              <a href="#" className="text-sm font-mono text-slate-400 hover:text-cyan-400 transition-colors">/discover</a>
-              <a href="#" className="text-sm font-mono text-slate-400 hover:text-cyan-400 transition-colors">/creators</a>
-              <a href="#" className="text-sm font-mono text-slate-400 hover:text-cyan-400 transition-colors">/docs</a>
-            </nav>
-
-            {/* Actions */}
-            <div className="flex items-center space-x-4">
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="group flex items-center space-x-2 px-3 py-1.5 sm:px-4 sm:py-2 bg-[#0a0a0f] border border-white/10 rounded-lg hover:border-cyan-500/50 hover:bg-cyan-500/5 transition-all duration-300 shadow-sm hover:shadow-[0_0_15px_rgba(0,240,255,0.15)]"
-              >
-                <Github className="w-4 h-4 text-slate-300 group-hover:text-cyan-400 transition-colors" />
-                <span className="text-sm font-mono font-bold text-slate-300 group-hover:text-cyan-50 transition-colors hidden sm:inline-block">GitHub</span>
-                <div className="hidden sm:flex items-center pl-3 ml-1 border-l border-white/10 group-hover:border-cyan-500/30 transition-colors">
-                  <Star className="w-3.5 h-3.5 text-yellow-500 mr-1.5" />
-                  <span className="text-xs font-mono text-slate-400 group-hover:text-cyan-100">12.4k</span>
-                </div>
-              </a>
-            </div>
-          </div>
-        </header>
-
-        {/* --- MAIN CONTENT --- */}
-        <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12">
-          
-          {/* Hero Section */}
-          <div className="flex flex-col items-center text-center mb-16 mt-8">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-cyan-400 mb-6 backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-              <span>System Online // v2.4.1</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-mono font-extrabold text-white tracking-tight mb-6 drop-shadow-lg flex items-center justify-center">
-              <span>Codex<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500">Depot</span></span>
-              <span className="w-4 h-10 md:h-14 bg-cyan-400 ml-3 animate-[pulse_1.5s_ease-in-out_infinite] shadow-[0_0_15px_rgba(0,240,255,0.6)]"></span>
+            <h1 className="font-bold text-gray-100 tracking-tight text-lg leading-none">
+              CODEX<span className="text-gray-600 font-normal">_DEPOT</span>
             </h1>
-            <p className="text-lg text-slate-400 max-w-2xl mb-10 font-light">
-              Discover, deploy, and scale elite code architectures, UI modules, and AI models built by top-tier developers.
-            </p>
-
-            {/* Global Search - CLI Style */}
-            <div className="w-full max-w-2xl mt-2 group relative">
-              <div className="relative flex items-center w-full bg-[#0a0a0f]/90 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-xl transition-all duration-300 focus-within:border-cyan-500/50 focus-within:shadow-[0_0_25px_rgba(0,240,255,0.15)] focus-within:bg-[#050508]">
-                
-                {/* Sleek Terminal Prefix */}
-                <div className="flex items-center pl-4 pr-3 py-3.5 bg-white/[0.02] border-r border-white/5 select-none shrink-0">
-                  <span className="font-mono text-sm flex items-center">
-                    <span className="text-cyan-400">~</span>
-                    <span className="text-slate-500">/</span>
-                    <span className="text-purple-400 hidden sm:inline">query</span>
-                    <span className="text-cyan-400 ml-1.5 animate-[pulse_1s_ease-in-out_infinite]">_</span>
-                  </span>
-                </div>
-
-                {/* Input */}
-                <input
-                  type="text"
-                  placeholder="find frameworks, modules, or templates..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-grow bg-transparent border-none outline-none px-4 py-3.5 text-cyan-50 font-mono text-sm placeholder-slate-600 w-full"
-                  spellCheck={false}
-                />
-
-                {/* Suffix / Key Hint */}
-                <div className="pr-4 flex items-center shrink-0 space-x-3">
-                  <kbd className="hidden sm:inline-flex items-center px-2 py-1 border border-white/10 rounded text-[10px] font-mono text-slate-400 bg-white/5 group-focus-within:border-cyan-500/30 group-focus-within:text-cyan-400 transition-colors">
-                    ↵ Enter
-                  </kbd>
-                </div>
-              </div>
-            </div>
           </div>
-
-          {/* Filters & Categories */}
-          <div className="flex flex-col md:flex-row items-center justify-between mb-8 space-y-4 md:space-y-0">
-            <div className="flex overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:pb-0 hide-scrollbar w-full md:w-auto space-x-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-lg font-mono text-sm border transition-all duration-300 ${
-                    activeCategory === cat
-                      ? 'bg-cyan-500/10 border-cyan-500/50 text-cyan-300 shadow-[0_0_10px_rgba(0,240,255,0.1)]'
-                      : 'bg-white/5 border-transparent text-slate-400 hover:bg-white/10 hover:text-white'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-            
-            <button className="flex items-center space-x-2 px-4 py-2 bg-[#0a0a0f] border border-white/10 rounded-lg text-sm font-mono text-slate-400 hover:text-white hover:border-white/20 transition-colors shrink-0">
-              <Filter className="w-4 h-4" />
-              <span>Filters</span>
-            </button>
-          </div>
-
-          {/* Grid Layout Redesigned */}
-          {filteredItems.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredItems.map((item) => (
-                <div 
-                  key={item.id} 
-                  onClick={() => setSelectedItem(item)}
-                  className="group relative flex flex-col bg-[#0f1115] border border-white/5 rounded-xl h-[280px] cursor-pointer hover:border-cyan-500/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-all duration-500 hover:-translate-y-1 overflow-hidden"
-                >
-                  {/* --- NORMAL STATE FACE --- */}
-                  <div className="absolute inset-0 p-5 flex flex-col items-center text-center transition-opacity duration-300 group-hover:opacity-0">
-                    {/* Top Bar (Category & Downloads) */}
-                    <div className="flex justify-between items-center w-full mb-6">
-                      <span className="text-[10px] font-mono text-orange-500 uppercase tracking-wider font-bold">
-                        {item.category}
-                      </span>
-                      <span className="text-[10px] font-mono text-emerald-400 border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                        <Download size={10} /> {item.downloads}
-                      </span>
-                    </div>
-
-                    {/* Central Icon */}
-                    <div className="w-16 h-16 rounded-full bg-black/40 border border-white/5 flex items-center justify-center mb-5 shadow-inner">
-                      {item.icon}
-                    </div>
-
-                    {/* Text Content */}
-                    <h3 className="text-base font-bold text-white mb-2 leading-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-xs text-slate-400 line-clamp-3 px-1">
-                      {item.description}
-                    </p>
-                  </div>
-
-                  {/* --- HOVER STATE FACE (Installation Command) --- */}
-                  <div className="absolute inset-0 p-5 flex flex-col bg-[#14161a] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-                    <div className="text-center text-xs font-mono text-orange-500 mb-4 font-bold tracking-wide">
-                      Installation Command
-                    </div>
-                    
-                    {/* Command Box */}
-                    <div className="bg-[#050508] border border-white/10 rounded-md p-4 mb-auto relative group/code hover:border-cyan-500/30 transition-colors">
-                      <code className="text-xs font-mono text-slate-300 break-words leading-relaxed select-all block pr-8">
-                        {item.installCommand}
-                      </code>
-                      <button 
-                        onClick={(e) => copyToClipboard(e, item.installCommand, item.id)}
-                        className="absolute top-2 right-2 p-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-slate-400 hover:text-cyan-400 transition-all"
-                        title="Copy Command"
-                      >
-                        {copiedId === item.id ? <Check size={14} className="text-emerald-400" /> : <Copy size={14} />}
-                      </button>
-                    </div>
-
-                    {/* Actions */}
-                    <div className="flex gap-3 mt-4">
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); setSelectedItem(item); }}
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-mono text-slate-300 bg-white/5 hover:bg-white/10 rounded border border-white/10 transition-colors"
-                      >
-                        <Folder size={14} /> View Details
-                      </button>
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); /* Add to stack logic here */ }}
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 text-xs font-mono text-black font-bold bg-orange-500 hover:bg-orange-400 rounded transition-colors shadow-[0_0_15px_rgba(249,115,22,0.2)]"
-                      >
-                        <Plus size={14} /> Add to Stack
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            /* Empty State */
-            <div className="w-full py-20 flex flex-col items-center justify-center text-center border border-dashed border-white/10 rounded-2xl bg-white/5">
-              <Terminal className="w-12 h-12 text-slate-600 mb-4" />
-              <h3 className="text-xl font-bold text-white mb-2">No modules found</h3>
-              <p className="text-slate-400 text-sm max-w-md font-mono">
-                Query returned 0 results. Try adjusting your parameters or deploying a new search matrix.
-              </p>
-            </div>
-          )}
-
-          {/* Load More */}
-          {filteredItems.length > 0 && (
-            <div className="mt-12 flex justify-center">
-              <button className="px-6 py-3 bg-transparent border border-white/10 text-white font-mono text-sm rounded-lg hover:border-cyan-500/50 hover:text-cyan-400 transition-all flex items-center space-x-2 group">
-                <span>LOAD_MORE_RECORDS</span>
-                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </div>
-          )}
-        </main>
-
-        {/* --- FOOTER --- */}
-        <footer className="border-t border-white/5 bg-[#010101] py-12 mt-auto">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
-            <div className="flex items-center space-x-2">
-              <Terminal className="w-5 h-5 text-cyan-500" />
-              <span className="font-mono font-bold text-lg text-white">CODEX</span>
-            </div>
-            
-            <div className="flex items-center space-x-6">
-              <a href="#" className="text-sm font-mono text-slate-500 hover:text-white transition-colors">STATUS</a>
-              <a href="#" className="text-sm font-mono text-slate-500 hover:text-white transition-colors">API</a>
-              <a href="#" className="text-sm font-mono text-slate-500 hover:text-white transition-colors">TERMS</a>
-            </div>
-
-            <div className="flex items-center space-x-4">
-              <a href="#" className="text-slate-500 hover:text-cyan-400 transition-colors">
-                <Github className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-          <div className="max-w-7xl mx-auto px-4 mt-8 text-center text-xs font-mono text-slate-700">
-            © {new Date().getFullYear()} CODEX MARKETPLACE. END OF LINE.
-          </div>
-        </footer>
-
-      </div>
-
-      {/* --- DETAILS MODAL --- */}
-      {selectedItem && (
-        <div 
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md transition-opacity"
-          onClick={() => setSelectedItem(null)}
-        >
-          <div 
-            className="bg-[#0f1115] border border-cyan-500/30 rounded-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(0,240,255,0.1)] relative flex flex-col hide-scrollbar"
-            onClick={e => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="sticky top-0 bg-[#0f1115]/90 backdrop-blur-md p-6 border-b border-white/5 flex justify-between items-start z-10">
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 rounded-xl bg-black/50 border border-white/10 flex items-center justify-center shadow-inner">
-                  {selectedItem.icon}
-                </div>
-                <div>
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="text-[10px] font-mono text-orange-500 uppercase tracking-wider font-bold bg-orange-500/10 px-2 py-0.5 rounded">
-                      {selectedItem.category}
-                    </span>
-                    <span className="text-[10px] font-mono text-emerald-400 border border-emerald-500/20 bg-emerald-500/10 px-2 py-0.5 rounded flex items-center gap-1">
-                      <Download size={10} /> {selectedItem.downloads}
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-white leading-tight">{selectedItem.title}</h2>
-                  <span className="text-xs font-mono text-slate-500">{selectedItem.author}</span>
-                </div>
-              </div>
-              <button 
-                onClick={() => setSelectedItem(null)}
-                className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-slate-400 hover:text-white transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-6 flex flex-col gap-8">
-              <div>
-                <h4 className="text-sm font-mono text-cyan-400 mb-3 border-b border-white/5 pb-2">_DESCRIPTION</h4>
-                <p className="text-slate-300 leading-relaxed text-sm">
-                  {selectedItem.description}
-                  <br/><br/>
-                  This module has been verified by the Codex community. It includes built-in safeguards, optimal performance pathways, and zero-configuration setup for immediate deployment into your environment.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-mono text-cyan-400 mb-3 border-b border-white/5 pb-2">_INSTALLATION</h4>
-                <div className="bg-[#050508] border border-white/10 rounded-lg p-4 relative group/modalcode">
-                  <div className="absolute top-0 left-0 px-3 py-1 bg-white/5 rounded-br-lg text-[10px] font-mono text-slate-500">Terminal</div>
-                  <code className="text-sm font-mono text-slate-300 block mt-4 pr-10 whitespace-pre-wrap">
-                    {selectedItem.installCommand}
-                  </code>
-                  <button 
-                    onClick={(e) => copyToClipboard(e, selectedItem.installCommand, 'modal')}
-                    className="absolute top-4 right-4 p-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded text-slate-400 hover:text-cyan-400 transition-all"
-                    title="Copy Command"
-                  >
-                    {copiedId === 'modal' ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-mono text-cyan-400 mb-3 border-b border-white/5 pb-2">_TAGS & METADATA</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedItem.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 bg-white/5 border border-white/10 rounded text-xs font-mono text-slate-300 uppercase tracking-wider">
-                      {tag}
-                    </span>
-                  ))}
-                  <span className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded text-xs font-mono text-cyan-400 uppercase tracking-wider">
-                    License: MIT
-                  </span>
-                </div>
-              </div>
-            </div>
-            
-            {/* Modal Footer */}
-            <div className="mt-auto p-6 border-t border-white/5 bg-black/20 flex justify-end gap-4">
-               <button 
-                  onClick={() => setSelectedItem(null)}
-                  className="px-6 py-2.5 text-sm font-mono text-slate-300 hover:text-white transition-colors"
-                >
-                  CANCEL
-                </button>
-               <button className="px-6 py-2.5 text-sm font-mono text-black font-bold bg-cyan-400 hover:bg-cyan-300 rounded shadow-[0_0_15px_rgba(0,240,255,0.3)] transition-all flex items-center gap-2">
-                 <Plus size={16} /> ADD TO STACK
-               </button>
-            </div>
+          <div className="hidden md:flex gap-6 text-[11px] font-bold tracking-widest text-gray-500">
+            <a href="#" className="hover:text-green-400 transition-colors flex items-center gap-2">GLOBAL_INDEX</a>
+            <a href="#" className="hover:text-green-400 transition-colors flex items-center gap-2">DOCS</a>
+            <a href="#" className="hover:text-green-400 transition-colors flex items-center gap-2">GITHUB</a>
           </div>
         </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="flex-1 max-w-[1600px] mx-auto w-full px-6 py-12 pb-24">
+
+        {/* REFINED SEARCH BAR */}
+        <div className="mb-12 max-w-3xl mx-auto">
+          <div className="relative group">
+            {/* Ambient Glow */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-lg blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
+
+            {/* Input Container */}
+            <div className="relative flex items-center bg-[#0d1117] border border-gray-800 rounded-lg shadow-2xl h-14 group-focus-within:border-gray-700 transition-colors">
+                {/* Prompt Character */}
+                <div className="pl-5 pr-4 text-green-500 font-bold text-lg select-none font-mono animate-pulse">
+                  {'>_'}
+                </div>
+
+                {/* Input Field */}
+                <input
+                  type="text"
+                  placeholder="search packages by name, description or tag..."
+                  className="w-full bg-transparent border-none text-gray-200 focus:outline-none font-mono text-sm placeholder-gray-600 h-full tracking-tight"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  autoFocus
+                />
+
+                {/* ESC Badge */}
+                <div className="absolute right-3 flex items-center pointer-events-none">
+                   <div className="flex items-center gap-1.5 px-2 py-1 bg-[#161b22] border border-gray-800 rounded text-[10px] text-gray-500 font-mono tracking-wide shadow-sm">
+                      <span className="font-bold">ESC</span> to clear
+                   </div>
+                </div>
+            </div>
+          </div>
+
+          {/* Categories */}
+          <div className="flex flex-wrap justify-center gap-2 mt-6">
+            {['all', 'agent', 'skill', 'mcp', 'template', 'hook'].map(cat => (
+              <button 
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`px-3 py-1 rounded text-[10px] font-bold uppercase tracking-wider border transition-all duration-200 ${activeCategory === cat ? 'bg-green-500/10 border-green-500/50 text-green-400' : 'bg-[#0d1117] border-gray-800 text-gray-600 hover:border-gray-600 hover:text-gray-400'}`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Results Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          {/* Add New Placeholder Card */}
+          <div className="border border-dashed border-gray-800 rounded-lg bg-[#0d1117]/30 hover:bg-[#0d1117]/50 hover:border-gray-700 transition-all cursor-pointer flex flex-col items-center justify-center p-6 min-h-[180px] group">
+              <div className="w-10 h-10 rounded-full bg-gray-800/50 flex items-center justify-center text-gray-500 mb-3 group-hover:bg-green-900/20 group-hover:text-green-500 transition-colors">
+                <Plus size={20} />
+              </div>
+              <h3 className="text-gray-300 font-bold text-sm mb-1">Add New Skill</h3>
+              <p className="text-gray-600 text-[10px] text-center max-w-[150px]">
+                Create a custom capability or agent for your registry.
+              </p>
+          </div>
+
+          {filteredItems.map(item => (
+            <div 
+              key={item.id} 
+              className="group bg-[#0d1117] border border-gray-800 rounded-lg p-5 transition-all duration-200 hover:border-gray-700 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)] flex flex-col h-full cursor-pointer relative"
+              onClick={() => setSelectedItem(item)}
+            >
+              {/* Card Header */}
+              <div className="flex justify-between items-start mb-4">
+                 <span className={`text-[9px] font-bold uppercase tracking-widest ${
+                    item.type === 'agent' ? 'text-purple-400' :
+                    item.type === 'mcp' ? 'text-blue-400' :
+                    item.type === 'skill' ? 'text-yellow-400' :
+                    'text-gray-500'
+                 }`}>
+                    {item.type}
+                 </span>
+                 
+                 <div className="flex items-center gap-1.5 px-1.5 py-0.5 rounded border border-gray-800 bg-[#161b22] text-[10px] text-green-500 font-mono">
+                    <Download size={10} />
+                    {item.downloads}
+                 </div>
+              </div>
+              
+              {/* Icon & Title */}
+              <div className="flex flex-col items-center text-center mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 shadow-lg ${
+                    item.type === 'agent' ? 'bg-purple-900/10 text-purple-400 ring-1 ring-purple-900/30' :
+                    item.type === 'mcp' ? 'bg-blue-900/10 text-blue-400 ring-1 ring-blue-900/30' :
+                    item.type === 'skill' ? 'bg-yellow-900/10 text-yellow-400 ring-1 ring-yellow-900/30' :
+                    'bg-gray-800 text-gray-400 ring-1 ring-gray-700'
+                  }`}>
+                      <IconForType type={item.type} className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-bold text-gray-200 text-sm mb-1">{item.name}</h3>
+                  <p className="text-gray-500 text-[10px] line-clamp-2 h-8 leading-relaxed px-2">
+                    {item.desc}
+                  </p>
+              </div>
+
+              {/* Install Command (Footer) */}
+              <div className="mt-auto">
+                 <div 
+                    className="bg-[#05070a] border border-gray-800 rounded px-3 py-2 flex items-center justify-between group-hover:border-green-900/50 transition-colors cursor-text"
+                    onClick={(e) => handleCopy(e, item.cmd, item.id)}
+                 >
+                    <div className="flex items-center gap-2 overflow-hidden w-full">
+                       <span className="text-green-600 text-[10px] font-bold shrink-0">$</span>
+                       <code className="text-[10px] text-gray-400 truncate font-mono">{item.cmd}</code>
+                    </div>
+                    <button className="text-gray-600 hover:text-green-400 transition-colors pl-2">
+                       {copiedId === item.id ? <Check size={12} /> : <Copy size={12} />}
+                    </button>
+                 </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Details Modal Overlay */}
+      {selectedItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 backdrop-blur-sm bg-black/60">
+           
+           <div className="relative bg-[#0d1117] border border-gray-700 w-full max-w-4xl h-[80vh] rounded-lg shadow-2xl flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+              
+              <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 text-gray-500 hover:text-white z-10 p-1.5 bg-black/50 rounded-md transition-colors">
+                 <X size={16} />
+              </button>
+
+              {/* Sidebar Info */}
+              <div className="w-full md:w-72 bg-[#161b22] border-r border-gray-800 p-8 flex flex-col shrink-0">
+                 <div className="mb-8">
+                    <div className="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center border border-gray-700/50 mb-5 shadow-inner">
+                       <IconForType type={selectedItem.type} className="w-8 h-8" />
+                    </div>
+                    <h2 className="text-xl font-bold text-white break-words tracking-tight">{selectedItem.name}</h2>
+                    <span className="text-xs text-green-500 font-mono mt-2 block">v{selectedItem.version}</span>
+                 </div>
+
+                 <div className="space-y-6 flex-1">
+                    <div>
+                       <h3 className="text-[10px] text-gray-500 uppercase font-bold mb-3 tracking-widest">Install</h3>
+                       <div 
+                          className="bg-black border border-gray-700 p-3 rounded text-xs text-green-400 font-mono break-all cursor-pointer hover:border-green-500 relative group transition-colors"
+                          onClick={(e) => handleCopy(e, selectedItem.cmd, selectedItem.id)}
+                       >
+                          <span className="opacity-50 select-none">$ </span>{selectedItem.cmd}
+                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 p-1 rounded">
+                              {copiedId === selectedItem.id ? <Check size={12} /> : <Copy size={12} />}
+                          </div>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+
+              {/* Main Docs Content */}
+              <div className="flex-1 p-8 overflow-y-auto bg-[#0d1117] relative scrollbar-thin scrollbar-thumb-gray-800">
+                 <div className="prose prose-invert prose-sm max-w-none">
+                    <div className="font-mono text-xs text-gray-600 mb-6 border-b border-gray-800 pb-2 flex justify-between">
+                        <span>README.md</span>
+                        <span>{selectedItem.id * 120}KB</span>
+                    </div>
+                    {selectedItem.readme.split('\n').map((line, i) => {
+                       if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-white mb-4">{line.replace('# ', '')}</h1>;
+                       if (line.startsWith('## ')) return <h2 key={i} className="text-base font-bold text-white mt-8 mb-3 flex items-center gap-2"><span className="text-green-500">#</span> {line.replace('## ', '')}</h2>;
+                       if (line.startsWith('- ')) return <li key={i} className="text-gray-400 ml-4 mb-1 list-disc marker:text-gray-600">{line.replace('- ', '')}</li>;
+                       if (line.trim() === '') return <br key={i} />;
+                       return <p key={i} className="text-gray-400 mb-2 leading-relaxed">{line}</p>;
+                    })}
+                 </div>
+              </div>
+
+           </div>
+        </div>
       )}
+      
+      {/* Background Decor */}
+      <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] bg-[radial-gradient(circle_at_50%_0%,_#111827_0%,_#05070a_50%)]"></div>
     </div>
   );
 }
