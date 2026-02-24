@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import type { CatalogItem } from '@/lib/catalog-types';
 import Link from 'next/link';
+import ReactMarkdown from 'react-markdown';
 
 interface HomeClientProps {
   items: CatalogItem[];
@@ -205,41 +206,75 @@ export function HomeClient({ items }: HomeClientProps) {
       
       {/* Details Modal Overlay */}
       {selectedItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 backdrop-blur-sm bg-black/60">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 backdrop-blur-sm bg-black/60 transition-opacity"
+          onClick={() => setSelectedItem(null)}
+        >
            
-           <div className="relative bg-[#0d1117] border border-gray-700 w-full max-w-4xl h-[80vh] rounded-lg shadow-2xl flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+           <div 
+             className="relative bg-[#0d1117] border border-gray-700 w-full max-w-4xl h-[80vh] rounded-lg shadow-2xl flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+             onClick={(e) => e.stopPropagation()}
+           >
               
-              <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 text-gray-500 hover:text-white z-10 p-1.5 bg-black/50 rounded-md transition-colors">
+              <button 
+                onClick={() => setSelectedItem(null)} 
+                className="absolute top-4 right-4 text-gray-400 hover:text-white z-10 p-2 bg-[#161b22] border border-gray-700 hover:border-gray-500 rounded-full transition-all shadow-lg"
+              >
                  <X size={16} />
               </button>
 
               {/* Sidebar Info */}
-              <div className="w-full md:w-72 bg-[#161b22] border-r border-gray-800 p-8 flex flex-col shrink-0">
-                 <div className="mb-8">
-                    <div className="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center border border-gray-700/50 mb-5 shadow-inner">
+              <div className="w-full md:w-80 bg-[#161b22] border-r border-gray-800 p-8 flex flex-col shrink-0 overflow-y-auto">
+                 <div className="mb-6">
+                    <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-5 shadow-inner ${
+                      selectedItem.type === 'agent' ? 'bg-purple-900/10 text-purple-400 ring-1 ring-purple-900/30' :
+                      selectedItem.type === 'skill' ? 'bg-yellow-900/10 text-yellow-400 ring-1 ring-yellow-900/30' :
+                      'bg-gray-800/50 text-gray-400 ring-1 ring-gray-700/50'
+                    }`}>
                        <IconForType type={selectedItem.type} className="w-8 h-8" />
                     </div>
-                    <h2 className="text-xl font-bold text-white break-words tracking-tight">{selectedItem.title}</h2>
-                    <span className="text-xs text-green-500 font-mono mt-2 block">v{selectedItem.content_version || '1.0.0'}</span>
+                    <div className="flex items-center gap-2 mb-2">
+                       <span className={`text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded border ${
+                          selectedItem.type === 'agent' ? 'border-purple-500/30 text-purple-400 bg-purple-500/10' :
+                          selectedItem.type === 'skill' ? 'border-yellow-500/30 text-yellow-400 bg-yellow-500/10' :
+                          'border-gray-700 text-gray-400 bg-gray-800'
+                       }`}>
+                          {selectedItem.type}
+                       </span>
+                       <span className="text-xs text-green-500 font-mono">v{selectedItem.content_version || '1.0.0'}</span>
+                    </div>
+                    <h2 className="text-2xl font-bold text-white tracking-tight leading-tight mb-3">{selectedItem.title}</h2>
+                    <p className="text-sm text-gray-400 leading-relaxed mb-4">{selectedItem.summary}</p>
+                    
+                    <div className="flex flex-wrap gap-1.5 mb-2">
+                      {selectedItem.tags.map(tag => (
+                        <span key={tag} className="text-[10px] text-gray-500 bg-black/40 border border-gray-800 px-1.5 py-0.5 rounded">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
                  </div>
 
-                 <div className="space-y-6 flex-1">
+                 <div className="space-y-6 flex-1 flex flex-col justify-end">
                     <div>
-                       <h3 className="text-[10px] text-gray-500 uppercase font-bold mb-3 tracking-widest">Install</h3>
+                       <h3 className="text-[10px] text-gray-500 uppercase font-bold mb-2 tracking-widest">Install Command</h3>
                        <div 
-                          className="bg-black border border-gray-700 p-3 rounded text-xs text-green-400 font-mono break-all cursor-pointer hover:border-green-500 relative group transition-colors"
+                          className="bg-[#05070a] border border-gray-700 p-3 rounded-lg text-xs text-green-400 font-mono break-all cursor-pointer hover:border-green-500 relative group transition-all shadow-inner"
                           onClick={(e) => handleCopy(e, selectedItem.install_hint, selectedItem.id)}
                        >
-                          <span className="opacity-50 select-none">$ </span>{selectedItem.install_hint}
-                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 p-1 rounded">
-                              {copiedId === selectedItem.id ? <Check size={12} /> : <Copy size={12} />}
+                          <div className="flex items-start gap-2">
+                             <Terminal size={14} className="mt-0.5 opacity-50 shrink-0" />
+                             <span className="flex-1">{selectedItem.install_hint}</span>
+                          </div>
+                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 p-1.5 rounded-md text-white shadow-md">
+                              {copiedId === selectedItem.id ? <Check size={14} /> : <Copy size={14} />}
                           </div>
                        </div>
                     </div>
                     
                     <Link 
                       href={selectedItem.route}
-                      className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-green-400 transition-colors uppercase font-bold tracking-widest mt-8"
+                      className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-green-400 transition-colors uppercase font-bold tracking-widest"
                     >
                       View Full Details <ChevronRight size={14} />
                     </Link>
@@ -248,18 +283,18 @@ export function HomeClient({ items }: HomeClientProps) {
 
               {/* Main Docs Content */}
               <div className="flex-1 p-8 overflow-y-auto bg-[#0d1117] relative scrollbar-thin scrollbar-thumb-gray-800">
-                 <div className="prose prose-invert prose-sm max-w-none">
-                    <div className="font-mono text-xs text-gray-600 mb-6 border-b border-gray-800 pb-2 flex justify-between">
-                        <span>README.md</span>
-                        <span>{Math.round((selectedItem.body?.length || 0) / 1024) || 1}KB</span>
-                    </div>
-                    {(selectedItem.body || selectedItem.summary).split('\n').map((line, i) => {
-                       if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-white mb-4">{line.replace('# ', '')}</h1>;
-                       if (line.startsWith('## ')) return <h2 key={i} className="text-base font-bold text-white mt-8 mb-3 flex items-center gap-2"><span className="text-green-500">#</span> {line.replace('## ', '')}</h2>;
-                       if (line.startsWith('- ')) return <li key={i} className="text-gray-400 ml-4 mb-1 list-disc marker:text-gray-600">{line.replace('- ', '')}</li>;
-                       if (line.trim() === '') return <br key={i} />;
-                       return <p key={i} className="text-gray-400 mb-2 leading-relaxed">{line}</p>;
-                    })}
+                 <div className="font-mono text-xs text-gray-600 mb-8 border-b border-gray-800 pb-3 flex justify-between items-end">
+                     <span className="flex items-center gap-2">
+                       <Command size={14} />
+                       README.md
+                     </span>
+                     <span>{Math.round((selectedItem.body?.length || 0) / 1024) || 1}KB</span>
+                 </div>
+                 
+                 <div className="prose prose-invert prose-sm max-w-none prose-headings:text-white prose-a:text-green-400 prose-code:text-green-300 prose-pre:bg-[#05070a] prose-pre:border prose-pre:border-gray-800 text-gray-300">
+                    <ReactMarkdown>
+                      {selectedItem.body || selectedItem.summary}
+                    </ReactMarkdown>
                  </div>
               </div>
 
