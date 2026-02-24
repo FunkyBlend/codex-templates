@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { 
   Terminal, Search, Copy, Command, Box, Cpu, Zap, Settings, Shield, X, Check, ChevronRight, Globe, Github, Download, Eye, Plus 
 } from 'lucide-react';
 import type { CatalogItem } from '@/lib/catalog-types';
+import Link from 'next/link';
 
 interface HomeClientProps {
   items: CatalogItem[];
@@ -26,6 +26,7 @@ function IconForType({ type, className = "w-4 h-4" }: { type: string, className?
 
 export function HomeClient({ items }: HomeClientProps) {
   const router = useRouter();
+  const [selectedItem, setSelectedItem] = useState<CatalogItem | null>(null);
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -146,10 +147,10 @@ export function HomeClient({ items }: HomeClientProps) {
           </Link>
 
           {filteredItems.map(item => (
-            <Link 
-              href={item.route}
+            <div 
               key={item.id} 
               className="group bg-[#0d1117] border border-gray-800 rounded-lg p-5 transition-all duration-200 hover:border-gray-700 hover:shadow-[0_4px_20px_rgba(0,0,0,0.4)] flex flex-col h-full cursor-pointer relative"
+              onClick={() => setSelectedItem(item)}
             >
               {/* Card Header */}
               <div className="flex justify-between items-start mb-4">
@@ -197,11 +198,75 @@ export function HomeClient({ items }: HomeClientProps) {
                     </button>
                  </div>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>
       
+      {/* Details Modal Overlay */}
+      {selectedItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-10 backdrop-blur-sm bg-black/60">
+           
+           <div className="relative bg-[#0d1117] border border-gray-700 w-full max-w-4xl h-[80vh] rounded-lg shadow-2xl flex flex-col md:flex-row overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+              
+              <button onClick={() => setSelectedItem(null)} className="absolute top-4 right-4 text-gray-500 hover:text-white z-10 p-1.5 bg-black/50 rounded-md transition-colors">
+                 <X size={16} />
+              </button>
+
+              {/* Sidebar Info */}
+              <div className="w-full md:w-72 bg-[#161b22] border-r border-gray-800 p-8 flex flex-col shrink-0">
+                 <div className="mb-8">
+                    <div className="w-16 h-16 bg-gray-800/50 rounded-2xl flex items-center justify-center border border-gray-700/50 mb-5 shadow-inner">
+                       <IconForType type={selectedItem.type} className="w-8 h-8" />
+                    </div>
+                    <h2 className="text-xl font-bold text-white break-words tracking-tight">{selectedItem.title}</h2>
+                    <span className="text-xs text-green-500 font-mono mt-2 block">v{selectedItem.content_version || '1.0.0'}</span>
+                 </div>
+
+                 <div className="space-y-6 flex-1">
+                    <div>
+                       <h3 className="text-[10px] text-gray-500 uppercase font-bold mb-3 tracking-widest">Install</h3>
+                       <div 
+                          className="bg-black border border-gray-700 p-3 rounded text-xs text-green-400 font-mono break-all cursor-pointer hover:border-green-500 relative group transition-colors"
+                          onClick={(e) => handleCopy(e, selectedItem.install_hint, selectedItem.id)}
+                       >
+                          <span className="opacity-50 select-none">$ </span>{selectedItem.install_hint}
+                          <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gray-800 p-1 rounded">
+                              {copiedId === selectedItem.id ? <Check size={12} /> : <Copy size={12} />}
+                          </div>
+                       </div>
+                    </div>
+                    
+                    <Link 
+                      href={selectedItem.route}
+                      className="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-green-400 transition-colors uppercase font-bold tracking-widest mt-8"
+                    >
+                      View Full Details <ChevronRight size={14} />
+                    </Link>
+                 </div>
+              </div>
+
+              {/* Main Docs Content */}
+              <div className="flex-1 p-8 overflow-y-auto bg-[#0d1117] relative scrollbar-thin scrollbar-thumb-gray-800">
+                 <div className="prose prose-invert prose-sm max-w-none">
+                    <div className="font-mono text-xs text-gray-600 mb-6 border-b border-gray-800 pb-2 flex justify-between">
+                        <span>README.md</span>
+                        <span>{Math.round((selectedItem.body?.length || 0) / 1024) || 1}KB</span>
+                    </div>
+                    {(selectedItem.body || selectedItem.summary).split('\n').map((line, i) => {
+                       if (line.startsWith('# ')) return <h1 key={i} className="text-2xl font-bold text-white mb-4">{line.replace('# ', '')}</h1>;
+                       if (line.startsWith('## ')) return <h2 key={i} className="text-base font-bold text-white mt-8 mb-3 flex items-center gap-2"><span className="text-green-500">#</span> {line.replace('## ', '')}</h2>;
+                       if (line.startsWith('- ')) return <li key={i} className="text-gray-400 ml-4 mb-1 list-disc marker:text-gray-600">{line.replace('- ', '')}</li>;
+                       if (line.trim() === '') return <br key={i} />;
+                       return <p key={i} className="text-gray-400 mb-2 leading-relaxed">{line}</p>;
+                    })}
+                 </div>
+              </div>
+
+           </div>
+        </div>
+      )}
+
       {/* Background Decor */}
       <div className="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] bg-[radial-gradient(circle_at_50%_0%,_#111827_0%,_#05070a_50%)]"></div>
     </div>
