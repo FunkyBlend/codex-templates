@@ -8,3 +8,4 @@ node_modules/
 artifacts/cli-smoke/
 .agent/
 .claude/
+.cache/

@@ -1,0 +1,10 @@
+version: 1
+sources:
+  - id: openai-skills
+    trust: A
+    repo: https://github.com/openai/skills
+    ref: main
+    include_paths:
+      - skills/.curated/**
+      - skills/.experimental/**
+    install_hint: skill-installer

@@ -1,0 +1,6 @@
+version: 1
+allowed_skills:
+  # Examples of high-risk but trusted skills:
+  - openai-skills:develop-web-game
+  - openai-skills:screenshot
+  - openai-skills:sentry

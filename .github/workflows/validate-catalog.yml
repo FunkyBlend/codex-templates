@@ -1,0 +1,32 @@
+name: Validate Catalog
+
+on:
+  pull_request:
+    paths:
+      - 'catalog/**'
+      - '.github/workflows/validate-catalog.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Ingest
+        run: npm run catalog:ingest
+
+      - name: Run Schema Validation
+        run: npm run catalog:validate
+
+      - name: Check Diff
+        run: npm run catalog:diff

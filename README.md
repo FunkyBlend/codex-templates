@@ -20,6 +20,32 @@ Community-driven Codex marketplace using GitHub content as source of truth.
 - `public/data/` generated index artifacts.
 - `cli/` CodexDepot CLI package scaffold.
 
+## Skill Ingestion Pipeline
+
+CodexDepot pulls skills from external repositories defined in `catalog/sources.yaml`.
+
+### Contributing Skills
+
+There are two paths to add a skill to the marketplace:
+
+**Path A: Direct PR (Best for single skills)**
+1. Fork the repository.
+2. Add your skill folder under `content/skills/<slug>/`.
+3. Ensure it has a valid `SKILL.md`.
+4. Open a Pull Request. CI will validate it.
+
+**Path B: External Repo Link (Best for large collections)**
+1. Host your skills in a public GitHub repository.
+2. Ensure they follow the `SKILL.md` format.
+3. Open a Pull Request adding your repository to `catalog/sources.yaml` (Trust Tier C).
+4. Our nightly ingestion pipeline will scan your repo, run risk/license checks, and publish the safe skills.
+
+### Pipeline Commands
+
+* `npm run catalog:ingest` - Fetches and parses all sources in `sources.yaml`, runs risk scanning, and writes to `public/data/catalog.json`. Use `-- --dry-run` to test without writing.
+* `npm run catalog:validate` - Explicitly runs AJV schema validation against the generated catalog.
+* `npm run catalog:diff` - Shows what skills were added, removed, or changed compared to the last committed catalog.
+
 ## Local Commands
 ```bash
 npm run validate:content
