@@ -77,3 +77,71 @@ export function validateCatalogItems(items: any[], schemaPath: string): boolean 
 
   return true;
 }
+
+function normalizeKey(value: unknown): string | null {
+  if (typeof value !== "string") return null;
+  const normalized = value.trim().toLowerCase();
+  return normalized.length > 0 ? normalized : null;
+}
+
+function isBrokenSourcePath(value: unknown): boolean {
+  if (typeof value !== "string") return true;
+  const normalized = value.trim();
+  if (!normalized) return true;
+  if (path.isAbsolute(normalized)) return true;
+  if (normalized.includes("..")) return true;
+  return false;
+}
+
+export interface SemanticValidationOptions {
+  allowedHighRiskIds?: Set<string>;
+}
+
+export function validateCatalogSemantics(
+  items: any[],
+  options: SemanticValidationOptions = {},
+): string[] {
+  const errors: string[] = [];
+  const seenNames = new Map<string, string>();
+  const seenIds = new Set<string>();
+
+  for (const item of items) {
+    const itemId = typeof item?.id === "string" ? item.id : "(unknown-id)";
+
+    if (typeof item?.id === "string") {
+      if (seenIds.has(item.id)) {
+        errors.push(`Duplicate id detected: ${item.id}`);
+      } else {
+        seenIds.add(item.id);
+      }
+    }
+
+    const nameKey = normalizeKey(item?.name);
+    if (nameKey) {
+      const previousId = seenNames.get(nameKey);
+      if (previousId && previousId !== itemId) {
+        errors.push(`Duplicate name collision: '${item.name}' (${previousId} and ${itemId})`);
+      } else {
+        seenNames.set(nameKey, itemId);
+      }
+    }
+
+    if (typeof item?.description !== "string" || item.description.trim().length === 0) {
+      errors.push(`Empty description: ${itemId}`);
+    }
+
+    if (item?.license?.spdx === "UNKNOWN") {
+      errors.push(`Missing license (UNKNOWN): ${itemId}`);
+    }
+
+    if (item?.risk?.level === "high" && !options.allowedHighRiskIds?.has(itemId)) {
+      errors.push(`High-risk entry present in published catalog: ${itemId}`);
+    }
+
+    if (isBrokenSourcePath(item?.source?.path)) {
+      errors.push(`Broken source path: ${itemId} -> '${item?.source?.path ?? ""}'`);
+    }
+  }
+
+  return errors;
+}

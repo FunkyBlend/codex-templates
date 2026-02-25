@@ -1,12 +1,43 @@
 {
   "index_version": "1.0.0",
-  "generated_at": "2026-02-24T03:58:22.626Z",
-  "total_items": 6,
+  "generated_at": "2026-02-25T02:56:48.994Z",
+  "total_items": 26,
   "source": {
     "repository": "FunkyBlend/codex-templates",
     "branch": "main"
   },
   "items": [
+    {
+      "id": "skill.cloudflare-deploy",
+      "type": "skill",
+      "slug": "cloudflare-deploy",
+      "title": "Cloudflare Deploy",
+      "summary": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "cloudflare",
+        "deploy"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/cloudflare-deploy",
+      "content_version": "local",
+      "content_path": "content/skills/cloudflare-deploy/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/cloudflare-deploy/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/cloudflare-deploy/SKILL.md",
+      "route": "/items/skill/cloudflare-deploy",
+      "install_hint": "codexdepot install skill cloudflare-deploy",
+      "render_excerpt": "Cloudflare Deploy Usage 1. Install with . 2. Use this skill when you need: Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host,",
+      "body": "# Cloudflare Deploy\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/cloudflare-deploy'`.\n2. Use this skill when you need: Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/cloudflare-deploy"
+    },
     {
       "id": "skill.commit-message-helper",
       "type": "skill",
@@ -35,6 +66,593 @@
       "install_hint": "codexdepot install skill commit-message-helper",
       "render_excerpt": "Commit Message Helper Usage 1. Run . 2. Summarize the change in one sentence. 3. Output a Conventional Commit in format. Notes Prefer , , , , , or . Keep the subject line under 72 characters.",
       "body": "# Commit Message Helper\r\n\r\n## Usage\r\n1. Run `git diff --staged`.\r\n2. Summarize the change in one sentence.\r\n3. Output a Conventional Commit in `type(scope): message` format.\r\n\r\n## Notes\r\n- Prefer `feat`, `fix`, `docs`, `refactor`, `test`, or `chore`.\r\n- Keep the subject line under 72 characters."
+    },
+    {
+      "id": "skill.develop-web-game",
+      "type": "skill",
+      "slug": "develop-web-game",
+      "title": "Develop Web Game",
+      "summary": "Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses,...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "develop",
+        "web",
+        "game"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/develop-web-game",
+      "content_version": "local",
+      "content_path": "content/skills/develop-web-game/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/develop-web-game/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/develop-web-game/SKILL.md",
+      "route": "/items/skill/develop-web-game",
+      "install_hint": "codexdepot install skill develop-web-game",
+      "render_excerpt": "Develop Web Game Usage 1. Install with . 2. Use this skill when you need: Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Pl",
+      "body": "# Develop Web Game\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/develop-web-game'`.\n2. Use this skill when you need: Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses,...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/develop-web-game"
+    },
+    {
+      "id": "skill.figma",
+      "type": "skill",
+      "slug": "figma",
+      "title": "Figma",
+      "summary": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "figma"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/figma",
+      "content_version": "local",
+      "content_path": "content/skills/figma/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/figma/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/figma/SKILL.md",
+      "route": "/items/skill/figma",
+      "install_hint": "codexdepot install skill figma",
+      "render_excerpt": "Figma Usage 1. Install with . 2. Use this skill when you need: Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger w",
+      "body": "# Figma\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/figma'`.\n2. Use this skill when you need: Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/figma"
+    },
+    {
+      "id": "skill.figma-implement-design",
+      "type": "skill",
+      "slug": "figma-implement-design",
+      "title": "Figma Implement Design",
+      "summary": "Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "figma",
+        "implement",
+        "design"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/figma-implement-design",
+      "content_version": "local",
+      "content_path": "content/skills/figma-implement-design/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/figma-implement-design/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/figma-implement-design/SKILL.md",
+      "route": "/items/skill/figma-implement-design",
+      "install_hint": "codexdepot install skill figma-implement-design",
+      "render_excerpt": "Figma Implement Design Usage 1. Install with . 2. Use this skill when you need: Translate Figma nodes into production ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets,",
+      "body": "# Figma Implement Design\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/figma-implement-design'`.\n2. Use this skill when you need: Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/figma-implement-design"
+    },
+    {
+      "id": "skill.gh-address-comments",
+      "type": "skill",
+      "slug": "gh-address-comments",
+      "title": "GitHub Address Comments",
+      "summary": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "gh",
+        "address",
+        "comments"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments",
+      "content_version": "local",
+      "content_path": "content/skills/gh-address-comments/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/gh-address-comments/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/gh-address-comments/SKILL.md",
+      "route": "/items/skill/gh-address-comments",
+      "install_hint": "codexdepot install skill gh-address-comments",
+      "render_excerpt": "GitHub Address Comments Usage 1. Install with . 2. Use this skill when you need: Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to a",
+      "body": "# GitHub Address Comments\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments'`.\n2. Use this skill when you need: Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
+    },
+    {
+      "id": "skill.gh-fix-ci",
+      "type": "skill",
+      "slug": "gh-fix-ci",
+      "title": "GitHub Fix Ci",
+      "summary": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "gh",
+        "fix",
+        "ci"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/gh-fix-ci",
+      "content_version": "local",
+      "content_path": "content/skills/gh-fix-ci/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/gh-fix-ci/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/gh-fix-ci/SKILL.md",
+      "route": "/items/skill/gh-fix-ci",
+      "install_hint": "codexdepot install skill gh-fix-ci",
+      "render_excerpt": "GitHub Fix Ci Usage 1. Install with . 2. Use this skill when you need: Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use to inspect checks and logs, summarize failure context, ",
+      "body": "# GitHub Fix Ci\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/gh-fix-ci'`.\n2. Use this skill when you need: Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/gh-fix-ci"
+    },
+    {
+      "id": "skill.jupyter-notebook",
+      "type": "skill",
+      "slug": "jupyter-notebook",
+      "title": "Jupyter Notebook",
+      "summary": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "jupyter",
+        "notebook"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/jupyter-notebook",
+      "content_version": "local",
+      "content_path": "content/skills/jupyter-notebook/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/jupyter-notebook/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/jupyter-notebook/SKILL.md",
+      "route": "/items/skill/jupyter-notebook",
+      "install_hint": "codexdepot install skill jupyter-notebook",
+      "render_excerpt": "Jupyter Notebook Usage 1. Install with . 2. Use this skill when you need: Use when the user asks to create, scaffold, or edit Jupyter notebooks ( ) for experiments, explorations, or tutorials; prefer the bundled template",
+      "body": "# Jupyter Notebook\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/jupyter-notebook'`.\n2. Use this skill when you need: Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/jupyter-notebook"
+    },
+    {
+      "id": "skill.linear",
+      "type": "skill",
+      "slug": "linear",
+      "title": "Linear",
+      "summary": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "linear"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/linear",
+      "content_version": "local",
+      "content_path": "content/skills/linear/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/linear/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/linear/SKILL.md",
+      "route": "/items/skill/linear",
+      "install_hint": "codexdepot install skill linear",
+      "render_excerpt": "Linear Usage 1. Install with . 2. Use this skill when you need: Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear. 3. Run it in a controlled environm",
+      "body": "# Linear\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/linear'`.\n2. Use this skill when you need: Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/linear"
+    },
+    {
+      "id": "skill.netlify-deploy",
+      "type": "skill",
+      "slug": "netlify-deploy",
+      "title": "Netlify Deploy",
+      "summary": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "netlify",
+        "deploy"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/netlify-deploy",
+      "content_version": "local",
+      "content_path": "content/skills/netlify-deploy/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/netlify-deploy/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/netlify-deploy/SKILL.md",
+      "route": "/items/skill/netlify-deploy",
+      "install_hint": "codexdepot install skill netlify-deploy",
+      "render_excerpt": "Netlify Deploy Usage 1. Install with . 2. Use this skill when you need: Deploy web projects to Netlify using the Netlify CLI ( ). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including",
+      "body": "# Netlify Deploy\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/netlify-deploy'`.\n2. Use this skill when you need: Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/netlify-deploy"
+    },
+    {
+      "id": "skill.openai-docs",
+      "type": "skill",
+      "slug": "openai-docs",
+      "title": "OpenAI Docs",
+      "summary": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "docs"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/openai-docs",
+      "content_version": "local",
+      "content_path": "content/skills/openai-docs/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/openai-docs/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/openai-docs/SKILL.md",
+      "route": "/items/skill/openai-docs",
+      "install_hint": "codexdepot install skill openai-docs",
+      "render_excerpt": "OpenAI Docs Usage 1. Install with . 2. Use this skill when you need: Use when the user asks how to build with OpenAI products or APIs and needs up to date official documentation with citations (for example: Codex, Respon",
+      "body": "# OpenAI Docs\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/openai-docs'`.\n2. Use this skill when you need: Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/openai-docs"
+    },
+    {
+      "id": "skill.pdf",
+      "type": "skill",
+      "slug": "pdf",
+      "title": "PDF",
+      "summary": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "pdf"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/pdf",
+      "content_version": "local",
+      "content_path": "content/skills/pdf/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/pdf/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/pdf/SKILL.md",
+      "route": "/items/skill/pdf",
+      "install_hint": "codexdepot install skill pdf",
+      "render_excerpt": "PDF Usage 1. Install with . 2. Use this skill when you need: Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use P",
+      "body": "# PDF\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/pdf'`.\n2. Use this skill when you need: Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/pdf"
+    },
+    {
+      "id": "skill.playwright",
+      "type": "skill",
+      "slug": "playwright",
+      "title": "Playwright",
+      "summary": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "playwright"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/playwright",
+      "content_version": "local",
+      "content_path": "content/skills/playwright/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/playwright/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/playwright/SKILL.md",
+      "route": "/items/skill/playwright",
+      "install_hint": "codexdepot install skill playwright",
+      "render_excerpt": "Playwright Usage 1. Install with . 2. Use this skill when you need: Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI flow debug",
+      "body": "# Playwright\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/playwright'`.\n2. Use this skill when you need: Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/playwright"
+    },
+    {
+      "id": "skill.render-deploy",
+      "type": "skill",
+      "slug": "render-deploy",
+      "title": "Render Deploy",
+      "summary": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "render",
+        "deploy"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/render-deploy",
+      "content_version": "local",
+      "content_path": "content/skills/render-deploy/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/render-deploy/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/render-deploy/SKILL.md",
+      "route": "/items/skill/render-deploy",
+      "install_hint": "codexdepot install skill render-deploy",
+      "render_excerpt": "Render Deploy Usage 1. Install with . 2. Use this skill when you need: Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants t",
+      "body": "# Render Deploy\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/render-deploy'`.\n2. Use this skill when you need: Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/render-deploy"
+    },
+    {
+      "id": "skill.screenshot",
+      "type": "skill",
+      "slug": "screenshot",
+      "title": "Screenshot",
+      "summary": "Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "screenshot"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/screenshot",
+      "content_version": "local",
+      "content_path": "content/skills/screenshot/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/screenshot/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/screenshot/SKILL.md",
+      "route": "/items/skill/screenshot",
+      "install_hint": "codexdepot install skill screenshot",
+      "render_excerpt": "Screenshot Usage 1. Install with . 2. Use this skill when you need: Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool specific cap",
+      "body": "# Screenshot\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/screenshot'`.\n2. Use this skill when you need: Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/screenshot"
+    },
+    {
+      "id": "skill.security-best-practices",
+      "type": "skill",
+      "slug": "security-best-practices",
+      "title": "Security Best Practices",
+      "summary": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "security",
+        "best",
+        "practices"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices",
+      "content_version": "local",
+      "content_path": "content/skills/security-best-practices/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/security-best-practices/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/security-best-practices/SKILL.md",
+      "route": "/items/skill/security-best-practices",
+      "install_hint": "codexdepot install skill security-best-practices",
+      "render_excerpt": "Security Best Practices Usage 1. Install with . 2. Use this skill when you need: Perform language and framework specific security best practice reviews and suggest improvements. Trigger only when the user explicitly requ",
+      "body": "# Security Best Practices\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices'`.\n2. Use this skill when you need: Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices"
+    },
+    {
+      "id": "skill.security-ownership-map",
+      "type": "skill",
+      "slug": "security-ownership-map",
+      "title": "Security Ownership Map",
+      "summary": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "security",
+        "ownership",
+        "map"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/security-ownership-map",
+      "content_version": "local",
+      "content_path": "content/skills/security-ownership-map/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/security-ownership-map/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/security-ownership-map/SKILL.md",
+      "route": "/items/skill/security-ownership-map",
+      "install_hint": "codexdepot install skill security-ownership-map",
+      "render_excerpt": "Security Ownership Map Usage 1. Install with . 2. Use this skill when you need: Analyze git repositories to build a security ownership topology (people to file), compute bus factor and sensitive code ownership, and expor",
+      "body": "# Security Ownership Map\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-ownership-map'`.\n2. Use this skill when you need: Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/security-ownership-map"
+    },
+    {
+      "id": "skill.security-threat-model",
+      "type": "skill",
+      "slug": "security-threat-model",
+      "title": "Security Threat Model",
+      "summary": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to...",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "security",
+        "threat",
+        "model"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model",
+      "content_version": "local",
+      "content_path": "content/skills/security-threat-model/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/security-threat-model/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/security-threat-model/SKILL.md",
+      "route": "/items/skill/security-threat-model",
+      "install_hint": "codexdepot install skill security-threat-model",
+      "render_excerpt": "Security Threat Model Usage 1. Install with . 2. Use this skill when you need: Repository grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes",
+      "body": "# Security Threat Model\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model'`.\n2. Use this skill when you need: Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to...\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model"
+    },
+    {
+      "id": "skill.sentry",
+      "type": "skill",
+      "slug": "sentry",
+      "title": "Sentry",
+      "summary": "Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry API; perform read-only queries with the bundled script and require `SENTRY_AUTH_TOKEN`.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "sentry"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/sentry",
+      "content_version": "local",
+      "content_path": "content/skills/sentry/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/sentry/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/sentry/SKILL.md",
+      "route": "/items/skill/sentry",
+      "install_hint": "codexdepot install skill sentry",
+      "render_excerpt": "Sentry Usage 1. Install with . 2. Use this skill when you need: Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry API; perform ",
+      "body": "# Sentry\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/sentry'`.\n2. Use this skill when you need: Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry API; perform read-only queries with the bundled script and require `SENTRY_AUTH_TOKEN`.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/sentry"
+    },
+    {
+      "id": "skill.spreadsheet",
+      "type": "skill",
+      "slug": "spreadsheet",
+      "title": "Spreadsheet",
+      "summary": "Use when tasks involve creating, editing, analyzing, or formatting spreadsheets (`.xlsx`, `.csv`, `.tsv`) using Python (`openpyxl`, `pandas`), especially when formulas, references, and formatting need to be preserved and verified.",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "spreadsheet"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/spreadsheet",
+      "content_version": "local",
+      "content_path": "content/skills/spreadsheet/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/spreadsheet/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/spreadsheet/SKILL.md",
+      "route": "/items/skill/spreadsheet",
+      "install_hint": "codexdepot install skill spreadsheet",
+      "render_excerpt": "Spreadsheet Usage 1. Install with . 2. Use this skill when you need: Use when tasks involve creating, editing, analyzing, or formatting spreadsheets ( , , ) using Python ( , ), especially when formulas, references, and f",
+      "body": "# Spreadsheet\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/spreadsheet'`.\n2. Use this skill when you need: Use when tasks involve creating, editing, analyzing, or formatting spreadsheets (`.xlsx`, `.csv`, `.tsv`) using Python (`openpyxl`, `pandas`), especially when formulas, references, and formatting need to be preserved and verified.\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/spreadsheet"
+    },
+    {
+      "id": "skill.yeet",
+      "type": "skill",
+      "slug": "yeet",
+      "title": "Yeet",
+      "summary": "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).",
+      "tags": [
+        "openai",
+        "codex",
+        "skill",
+        "yeet"
+      ],
+      "author": "OpenAI",
+      "license": "Apache-2.0",
+      "compatibility": [
+        "codex-cli",
+        "openai-codex"
+      ],
+      "updated_at": "2026-02-25",
+      "difficulty": "intermediate",
+      "source_url": "https://github.com/openai/skills/tree/main/skills/.curated/yeet",
+      "content_version": "local",
+      "content_path": "content/skills/yeet/SKILL.md",
+      "raw_url": "https://raw.githubusercontent.com/FunkyBlend/codex-templates/main/content/skills/yeet/SKILL.md",
+      "repo_url": "https://github.com/FunkyBlend/codex-templates/blob/main/content/skills/yeet/SKILL.md",
+      "route": "/items/skill/yeet",
+      "install_hint": "codexdepot install skill yeet",
+      "render_excerpt": "Yeet Usage 1. Install with . 2. Use this skill when you need: Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI ( ). 3. Run it in a controlled ",
+      "body": "# Yeet\n\n## Usage\n1. Install with `'$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/yeet'`.\n2. Use this skill when you need: Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).\n3. Run it in a controlled environment and review outputs before applying changes.\n\n## Source\n- Official source: https://github.com/openai/skills/tree/main/skills/.curated/yeet"
     },
     {
       "id": "agent.refactor-review",

@@ -26,15 +26,18 @@ jobs:
       - name: Ingest New Catalog
         run: npm run catalog:ingest
 
+      - name: Validate Catalog
+        run: npm run catalog:validate
+
       - name: Check for changes
         id: check_changes
         run: |
-          if [[ -n "$(git status --porcelain public/data/catalog.json)" ]]; then
+          if [[ -n "$(git status --porcelain public/data/catalog.json public/data/catalog.candidates.json)" ]]; then
             echo "changes_detected=true" >> $GITHUB_OUTPUT
-            echo "Changes detected in catalog.json"
+            echo "Changes detected in catalog artifacts"
           else
             echo "changes_detected=false" >> $GITHUB_OUTPUT
-            echo "No changes in catalog.json"
+            echo "No changes in catalog artifacts"
           fi
 
       - name: Create Pull Request
@@ -46,7 +49,9 @@ jobs:
           body: |
             Automated sync of CodexDepot skills catalog.
             
-            This PR updates `public/data/catalog.json` with the latest ingested skills.
+            This PR updates:
+            - `public/data/catalog.json` (published skills)
+            - `public/data/catalog.candidates.json` (review-required candidates)
           branch: chore/nightly-catalog-sync
           delete-branch: true
           base: main

@@ -16,6 +16,7 @@
     "catalog:ingest": "tsx catalog/ingest/ingest.ts",
     "catalog:validate": "tsx catalog/ingest/validate.ts",
     "catalog:diff": "tsx catalog/ingest/diff.ts",
+    "catalog:test": "tsx catalog/ingest/tests.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",

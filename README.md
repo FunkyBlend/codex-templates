@@ -42,9 +42,11 @@ There are two paths to add a skill to the marketplace:
 
 ### Pipeline Commands
 
-* `npm run catalog:ingest` - Fetches and parses all sources in `sources.yaml`, runs risk scanning, and writes to `public/data/catalog.json`. Use `-- --dry-run` to test without writing.
-* `npm run catalog:validate` - Explicitly runs AJV schema validation against the generated catalog.
-* `npm run catalog:diff` - Shows what skills were added, removed, or changed compared to the last committed catalog.
+* `npm run catalog:ingest` - Fetches/parses all sources in `sources.yaml`, applies trust/risk/license gating, writes published entries to `public/data/catalog.json`, and writes review-required entries to `public/data/catalog.candidates.json`.
+* `npm run catalog:ingest -- --dry-run` - Runs full ingest + gating + schema validation without writing files.
+* `npm run catalog:validate` - Runs schema + semantic validation for the published catalog.
+* `npm run catalog:validate -- --file <path>` - Validates a specific catalog artifact file.
+* `npm run catalog:diff` - Shows added/removed entries and field-level changes versus `HEAD`.
 
 ## Local Commands
 ```bash

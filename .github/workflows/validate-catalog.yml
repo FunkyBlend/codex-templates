@@ -22,8 +22,8 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
-      - name: Run Ingest
-        run: npm run catalog:ingest
+      - name: Run Ingest (Dry Run)
+        run: npm run catalog:ingest -- --dry-run
 
       - name: Run Schema Validation
         run: npm run catalog:validate

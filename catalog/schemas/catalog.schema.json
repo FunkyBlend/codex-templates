@@ -79,7 +79,19 @@
       "tags": {
         "type": "array",
         "items": { "type": "string" }
-      }
-    }
-  }
+      },
+      "version": {
+        "type": "string"
+      },
+      "tools": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "inputs": {},
+      "outputs": {},
+      "openai_meta": {}
+    },
+    "additionalProperties": false
+  },
+  "additionalItems": false
 }

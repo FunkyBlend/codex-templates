@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
 import { CatalogItem } from "./parse";
 
 const OUTPUT_FILE = path.resolve(__dirname, "..", "..", "public", "data", "catalog.json");
@@ -8,7 +8,7 @@ const OUTPUT_FILE = path.resolve(__dirname, "..", "..", "public", "data", "catal
 function getCommittedCatalog(): CatalogItem[] {
   try {
     const gitPath = "public/data/catalog.json";
-    const content = execSync(`git show HEAD:${gitPath}`, { encoding: "utf-8" });
+    const content = execFileSync("git", ["show", `HEAD:${gitPath}`], { encoding: "utf-8" });
     return JSON.parse(content);
   } catch (error) {
     console.warn("Could not load committed catalog (it might not exist yet).");
@@ -21,34 +21,58 @@ function getLocalCatalog(): CatalogItem[] {
   return JSON.parse(fs.readFileSync(OUTPUT_FILE, "utf-8"));
 }
 
+function getChangedFields(oldItem: CatalogItem, newItem: CatalogItem): string[] {
+  const changedFields: string[] = [];
+  const oldRecord = oldItem as unknown as Record<string, unknown>;
+  const newRecord = newItem as unknown as Record<string, unknown>;
+  const keySet = new Set<string>([
+    ...Object.keys(oldRecord),
+    ...Object.keys(newRecord),
+  ]);
+
+  keySet.forEach((key) => {
+    const oldValue = oldRecord[key];
+    const newValue = newRecord[key];
+    if (JSON.stringify(oldValue) !== JSON.stringify(newValue)) {
+      changedFields.push(key);
+    }
+  });
+
+  return changedFields.sort();
+}
+
 function main() {
   const oldCatalog = getCommittedCatalog();
   const newCatalog = getLocalCatalog();
 
-  const oldMap = new Map<string, CatalogItem>(oldCatalog.map(i => [i.id, i]));
-  const newMap = new Map<string, CatalogItem>(newCatalog.map(i => [i.id, i]));
+  const oldMap = new Map<string, CatalogItem>(oldCatalog.map((i) => [i.id, i]));
+  const newMap = new Map<string, CatalogItem>(newCatalog.map((i) => [i.id, i]));
 
   const added: string[] = [];
   const removed: string[] = [];
-  const changed: string[] = [];
+  const changed: { id: string; fields: string[] }[] = [];
 
-  for (const [id, newItem] of newMap.entries()) {
+  newMap.forEach((newItem, id) => {
     const oldItem = oldMap.get(id);
     if (!oldItem) {
       added.push(id);
     } else {
-      // Very basic comparison
-      if (JSON.stringify(oldItem) !== JSON.stringify(newItem)) {
-        changed.push(id);
+      const changedFields = getChangedFields(oldItem, newItem);
+      if (changedFields.length > 0) {
+        changed.push({ id, fields: changedFields });
       }
     }
-  }
+  });
 
-  for (const id of oldMap.keys()) {
+  oldMap.forEach((_, id) => {
     if (!newMap.has(id)) {
       removed.push(id);
     }
-  }
+  });
+
+  added.sort();
+  removed.sort();
+  changed.sort((a, b) => a.id.localeCompare(b.id));
 
   console.log("=== Catalog Diff ===");
   console.log(`Added:   ${added.length}`);
@@ -67,7 +91,7 @@ function main() {
 
   if (changed.length > 0) {
     console.log("\n--- Changed ---");
-    changed.forEach(id => console.log(`~ ${id}`));
+    changed.forEach(({ id, fields }) => console.log(`~ ${id} [${fields.join(", ")}]`));
   }
 }
 
