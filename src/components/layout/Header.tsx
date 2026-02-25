@@ -2,17 +2,28 @@
 
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const links = [
   { name: "Browse", href: "/browse" },
   { name: "CLI", href: "/cli" },
   { name: "Contribute", href: "/contribute" },
-  { name: "Docs", href: "/contribute" },
+  { name: "Docs", href: "https://docs.codexdepot.com" },
 ];
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [menuOpen]);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-dark-border bg-dark-bg/90 backdrop-blur">
@@ -32,7 +43,7 @@ export function Header() {
             </Link>
           ))}
           <a
-            href="https://github.com"
+            href="https://github.com/FunkyBlend/codex-templates"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded border border-dark-border px-3 py-1.5 text-xs font-semibold text-dark-muted transition hover:border-accent-green hover:text-accent-green"
@@ -57,23 +68,24 @@ export function Header() {
       </div>
 
       {menuOpen ? (
-        <nav className="border-t border-dark-border bg-dark-bg px-6 py-4 md:hidden">
-          <div className="flex flex-col gap-3">
+        <nav role="dialog" aria-modal="true" aria-label="Mobile Navigation" className="border-t border-dark-border bg-dark-bg px-6 py-4 md:hidden fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto">
+          <div className="flex flex-col gap-4">
             {links.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-sm font-semibold text-dark-muted"
+                className="text-lg font-semibold text-dark-muted border-b border-dark-border/50 pb-2"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.name}
               </Link>
             ))}
             <a
-              href="https://github.com"
+              href="https://github.com/FunkyBlend/codex-templates"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-semibold text-dark-muted"
+              className="text-lg font-semibold text-dark-muted border-b border-dark-border/50 pb-2"
+              onClick={() => setMenuOpen(false)}
             >
               GitHub
             </a>

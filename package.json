@@ -13,6 +13,10 @@
     "validate:content": "tsx scripts/validate-content.ts",
     "build:index": "tsx scripts/build-index.ts",
     "build:search": "tsx scripts/build-search.ts",
+    "catalog:ingest": "tsx catalog/ingest/ingest.ts",
+    "catalog:validate": "tsx catalog/ingest/validate.ts",
+    "catalog:diff": "tsx catalog/ingest/diff.ts",
+    "catalog:test": "tsx catalog/ingest/tests.ts",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
@@ -51,8 +55,10 @@
     "@types/react-syntax-highlighter": "^15.5.13",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.21",
+    "gray-matter": "^4.0.3",
     "prisma": "^6.3.0",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.0"
+    "typescript": "^5.7.0",
+    "yaml": "^2.8.2"
   }
 }

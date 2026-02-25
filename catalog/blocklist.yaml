@@ -1,0 +1,7 @@
+version: 1
+blocked_skills:
+  # Examples of explicitly banned skills:
+  - openai-skills:notion-knowledge-capture
+blocked_sources:
+  # Block a whole source ID if compromised:
+  - malicious-source-id

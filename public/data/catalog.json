@@ -1,0 +1,695 @@
+[
+  {
+    "id": "openai-skills:cloudflare-deploy",
+    "name": "cloudflare-deploy",
+    "slug": "cloudflare-deploy",
+    "description": "Deploy applications and infrastructure to Cloudflare using Workers, Pages, and related platform services. Use when the user asks to deploy, host, publish, or set up a project on Cloudflare.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/cloudflare-deploy"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/cloudflare-deploy"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:develop-web-game",
+    "name": "develop-web-game",
+    "slug": "develop-web-game",
+    "description": "Use when Codex is building or iterating on a web game (HTML/JS) and needs a reliable development + testing loop: implement small changes, run a Playwright-based test script with short input bursts and intentional pauses, inspect screenshots/text, and review console errors with re",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/develop-web-game"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "high",
+      "flags": [
+        "fs_write"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/develop-web-game"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:figma",
+    "name": "figma",
+    "slug": "figma",
+    "description": "Use the Figma MCP server to fetch design context, screenshots, variables, and assets from Figma, and to translate Figma nodes into production code. Trigger when a task involves Figma URLs, node IDs, design-to-code implementation, or Figma MCP setup and troubleshooting.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/figma"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/figma"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:figma-implement-design",
+    "name": "figma-implement-design",
+    "slug": "figma-implement-design",
+    "description": "Translate Figma nodes into production-ready code with 1:1 visual fidelity using the Figma MCP workflow (design context, screenshots, assets, and project-convention translation). Trigger when the user provides Figma URLs or node IDs, or asks to implement designs or components that",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/figma-implement-design"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/figma-implement-design"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:gh-address-comments",
+    "name": "gh-address-comments",
+    "slug": "gh-address-comments",
+    "description": "Help address review/issue comments on the open GitHub PR for the current branch using gh CLI; verify gh auth first and prompt the user to authenticate if not logged in.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/gh-address-comments"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "medium",
+      "flags": [
+        "shell_exec"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/gh-address-comments"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:gh-fix-ci",
+    "name": "gh-fix-ci",
+    "slug": "gh-fix-ci",
+    "description": "Use when a user asks to debug or fix failing GitHub PR checks that run in GitHub Actions; use `gh` to inspect checks and logs, summarize failure context, draft a fix plan, and implement only after explicit approval. Treat external providers (for example Buildkite) as out of scope",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/gh-fix-ci"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "medium",
+      "flags": [
+        "shell_exec"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/gh-fix-ci"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:jupyter-notebook",
+    "name": "jupyter-notebook",
+    "slug": "jupyter-notebook",
+    "description": "Use when the user asks to create, scaffold, or edit Jupyter notebooks (`.ipynb`) for experiments, explorations, or tutorials; prefer the bundled templates and run the helper script `new_notebook.py` to generate a clean starting notebook.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/jupyter-notebook"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/jupyter-notebook"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:linear",
+    "name": "linear",
+    "slug": "linear",
+    "description": "Manage issues, projects & team workflows in Linear. Use when the user wants to read, create or updates tickets in Linear.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/linear"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/linear"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:netlify-deploy",
+    "name": "netlify-deploy",
+    "slug": "netlify-deploy",
+    "description": "Deploy web projects to Netlify using the Netlify CLI (`npx netlify`). Use when the user asks to deploy, host, publish, or link a site/repo on Netlify, including preview and production deploys.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/netlify-deploy"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/netlify-deploy"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:openai-docs",
+    "name": "openai-docs",
+    "slug": "openai-docs",
+    "description": "Use when the user asks how to build with OpenAI products or APIs and needs up-to-date official documentation with citations (for example: Codex, Responses API, Chat Completions, Apps SDK, Agents SDK, Realtime, model capabilities or limits); prioritize OpenAI docs MCP tools and re",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/openai-docs"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/openai-docs"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:pdf",
+    "name": "pdf",
+    "slug": "pdf",
+    "description": "Use when tasks involve reading, creating, or reviewing PDF files where rendering and layout matter; prefer visual checks by rendering pages (Poppler) and use Python tools such as `reportlab`, `pdfplumber`, and `pypdf` for generation and extraction.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/pdf"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/pdf"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:playwright",
+    "name": "playwright",
+    "slug": "playwright",
+    "description": "Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `playwright-cli` or the bundled wrapper script.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/playwright"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/playwright"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:render-deploy",
+    "name": "render-deploy",
+    "slug": "render-deploy",
+    "description": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/render-deploy"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/render-deploy"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:screenshot",
+    "name": "screenshot",
+    "slug": "screenshot",
+    "description": "Use when the user explicitly asks for a desktop or system screenshot (full screen, specific app or window, or a pixel region), or when tool-specific capture capabilities are unavailable and an OS-level capture is needed.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/screenshot"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "high",
+      "flags": [
+        "shell_exec",
+        "secrets"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/screenshot"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:security-best-practices",
+    "name": "security-best-practices",
+    "slug": "security-best-practices",
+    "description": "Perform language and framework specific security best-practice reviews and suggest improvements. Trigger only when the user explicitly requests security best practices guidance, a security review/report, or secure-by-default coding help. Trigger only for supported languages (pyth",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/security-best-practices"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": false,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-best-practices"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:security-ownership-map",
+    "name": "security-ownership-map",
+    "slug": "security-ownership-map",
+    "description": "Analyze git repositories to build a security ownership topology (people-to-file), compute bus factor and sensitive-code ownership, and export CSV/JSON for graph databases and visualization. Trigger only when the user explicitly wants a security-oriented ownership or bus-factor an",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/security-ownership-map"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": true,
+      "has_assets": false,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "medium",
+      "flags": [
+        "shell_exec"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-ownership-map"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:security-threat-model",
+    "name": "security-threat-model",
+    "slug": "security-threat-model",
+    "description": "Repository-grounded threat modeling that enumerates trust boundaries, assets, attacker capabilities, abuse paths, and mitigations, and writes a concise Markdown threat model. Trigger only when the user explicitly asks to threat model a codebase or path, enumerate threats/abuse pa",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/security-threat-model"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": false,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/security-threat-model"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:sentry",
+    "name": "sentry",
+    "slug": "sentry",
+    "description": "Use when the user asks to inspect Sentry issues or events, summarize recent production errors, or pull basic Sentry health data via the Sentry API; perform read-only queries with the bundled script and require `SENTRY_AUTH_TOKEN`.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/sentry"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": true,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "high",
+      "flags": [
+        "secrets"
+      ]
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/sentry"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:spreadsheet",
+    "name": "spreadsheet",
+    "slug": "spreadsheet",
+    "description": "Use when tasks involve creating, editing, analyzing, or formatting spreadsheets (`.xlsx`, `.csv`, `.tsv`) using Python (`openpyxl`, `pandas`), especially when formulas, references, and formatting need to be preserved and verified.",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/spreadsheet"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": true,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/spreadsheet"
+      }
+    ]
+  },
+  {
+    "id": "openai-skills:yeet",
+    "name": "yeet",
+    "slug": "yeet",
+    "description": "Use only when the user explicitly asks to stage, commit, push, and open a GitHub pull request in one flow using the GitHub CLI (`gh`).",
+    "trust": "A",
+    "source": {
+      "repo": "https://github.com/openai/skills",
+      "ref": "main",
+      "commit": "2c9ebb321958f64aa9414b46e4240901e2b9e1a9",
+      "path": "skills/.curated/yeet"
+    },
+    "license": {
+      "spdx": "Apache-2.0",
+      "file": "LICENSE.txt"
+    },
+    "layout": {
+      "has_scripts": false,
+      "has_references": false,
+      "has_assets": true,
+      "has_openai_yaml": true
+    },
+    "risk": {
+      "level": "low",
+      "flags": []
+    },
+    "tags": [],
+    "install": [
+      {
+        "method": "codex_skill_installer",
+        "hint": "$skill-installer install https://github.com/openai/skills/tree/main/skills/.curated/yeet"
+      }
+    ]
+  }
+]

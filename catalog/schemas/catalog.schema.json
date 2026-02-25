@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CodexDepot Catalog",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "name", "slug", "description", "trust", "source", "license", "layout", "risk"],
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "Unique identifier (Format: source-id:slug)"
+      },
+      "name": {
+        "type": "string",
+        "maxLength": 80
+      },
+      "slug": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string",
+        "maxLength": 280
+      },
+      "trust": {
+        "type": "string",
+        "enum": ["A", "B", "C"]
+      },
+      "source": {
+        "type": "object",
+        "required": ["repo", "ref", "path"],
+        "properties": {
+          "repo": { "type": "string" },
+          "ref": { "type": "string" },
+          "commit": { "type": "string" },
+          "path": { "type": "string" }
+        }
+      },
+      "license": {
+        "type": "object",
+        "required": ["spdx", "file"],
+        "properties": {
+          "spdx": { "type": "string" },
+          "file": { "type": "string" }
+        }
+      },
+      "layout": {
+        "type": "object",
+        "properties": {
+          "has_scripts": { "type": "boolean" },
+          "has_references": { "type": "boolean" },
+          "has_assets": { "type": "boolean" },
+          "has_openai_yaml": { "type": "boolean" }
+        }
+      },
+      "risk": {
+        "type": "object",
+        "required": ["level", "flags"],
+        "properties": {
+          "level": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          },
+          "flags": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      },
+      "install": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "method": { "type": "string" },
+            "hint": { "type": "string" }
+          }
+        }
+      },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "version": {
+        "type": "string"
+      },
+      "tools": {
+        "type": "array",
+        "items": { "type": "string" }
+      },
+      "inputs": {},
+      "outputs": {},
+      "openai_meta": {}
+    },
+    "additionalProperties": false
+  },
+  "additionalItems": false
+}
